@@ -4,6 +4,7 @@ import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import index from "./routes/index.js";
+import errorHandling from "./middleware/errorHandling.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,6 +26,9 @@ app.use("/api/", index.indexRouter);
 app.use("/api/users", index.userRouter);
 app.use("/api/devices", index.deviceRouter);
 app.use("/api/history", index.historyRouter);
+
+// error handling
+app.use(errorHandling);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
