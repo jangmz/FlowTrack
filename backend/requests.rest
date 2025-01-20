@@ -33,6 +33,30 @@ DELETE http://localhost:5000/api/devices/2
 ############################################# USERS
 GET http://localhost:5000/api/users
 
+### insert user
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "fullName": "Test User",
+    "role": "user",
+    "username": "testuser2",
+    "password": "testuser",
+    "email": "test2@user.com"
+}
+
+### delete user
+DELETE http://localhost:5000/api/users/1
+
+### edit user
+PUT http://localhost:5000/api/users/4
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@user.com"
+}
+
 ############################################# HISTORY
 GET http://localhost:5000/api/history
 
