@@ -60,3 +60,16 @@ Content-Type: application/json
 ############################################# HISTORY
 GET http://localhost:5000/api/history
 
+### insert data into history
+POST http://localhost:5000/api/history
+Content-Type: application/json
+
+{
+    "userId": "4",
+    "deviceId": "1",
+    "rentDate": "2025-01-18",
+    "returnDate": "2025-01-21"
+}
+
+### delete data from history
+DELETE http://localhost:5000/api/history/1
