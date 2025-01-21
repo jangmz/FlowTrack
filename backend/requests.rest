@@ -67,8 +67,8 @@ Content-Type: application/json
 {
     "userId": "4",
     "deviceId": "1",
-    "rentDate": "2025-01-18",
-    "returnDate": "2025-01-21"
+    "rentDate": "2025-01-11",
+    "returnDate": "2025-01-15"
 }
 
 ### delete data from history
