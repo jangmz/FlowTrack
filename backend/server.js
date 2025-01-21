@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import userRouter from "./routes/user.js";
 import deviceRouter from "./routes/device.js";
 import historyRouter from "./routes/history.js";
+import authRouter from "./routes/auth.js";
 import errorHandling from "./middleware/errorHandling.js";
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(cors());
 app.use("/api/users", userRouter);
 app.use("/api/devices", deviceRouter);
 app.use("/api/history", historyRouter);
+app.use("/auth", authRouter);
 
 // error handling
 app.use(errorHandling);
