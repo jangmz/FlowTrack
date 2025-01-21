@@ -31,6 +31,17 @@ async function getAllUsers() {
     );
 }
 
+// return user from username
+async function getUserByUsername(username) {
+    return await safeQuery(() => 
+        prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+    );
+}
+
 // delete user
 async function deleteUser(userId) {
     return await safeQuery(() =>
@@ -62,6 +73,7 @@ async function editUserData(user) {
 export default {
     createUser,
     getAllUsers,
+    getUserByUsername,
     deleteUser,
     editUserData,
 }   
