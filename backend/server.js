@@ -3,7 +3,9 @@ import cors from "cors";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
-import index from "./routes/index.js";
+import userRouter from "./routes/user.js";
+import deviceRouter from "./routes/device.js";
+import historyRouter from "./routes/history.js";
 import errorHandling from "./middleware/errorHandling.js";
 
 const app = express();
@@ -22,10 +24,10 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.use("/api/", index.indexRouter);
-app.use("/api/users", index.userRouter);
-app.use("/api/devices", index.deviceRouter);
-app.use("/api/history", index.historyRouter);
+//app.use("/api/", index.indexRouter);
+app.use("/api/users", userRouter);
+app.use("/api/devices", deviceRouter);
+app.use("/api/history", historyRouter);
 
 // error handling
 app.use(errorHandling);
