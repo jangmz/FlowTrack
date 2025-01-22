@@ -17,8 +17,8 @@ async function insertUser(req, res, next) {
     console.log("Saving new user: ", newUser);
 
     try {
-        const user = await db.createUser(newUser);
-        res.json({ message: "User saved to database.", data: user });
+        await db.createUser(newUser);
+        res.json({ message: "User saved to database." });
     } catch (error) {
         next(error);
     }
