@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 // create new user
 async function createUser(user) {
-    return await safeQuery(() => 
+    await safeQuery(() => 
         prisma.user.create({
             data: {
                 fullName: user.fullName,
@@ -37,6 +37,17 @@ async function getUserByUsername(username) {
         prisma.user.findUnique({
             where: {
                 username: username
+            }
+        })
+    );
+}
+
+// return user from email
+async function getUserByEmail(email) {
+    return await safeQuery(() => 
+        prisma.user.findUnique({
+            where: {
+                email: email
             }
         })
     );
@@ -74,6 +85,7 @@ export default {
     createUser,
     getAllUsers,
     getUserByUsername,
+    getUserByEmail,
     deleteUser,
     editUserData,
 }   
