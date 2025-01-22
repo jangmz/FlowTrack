@@ -25,7 +25,19 @@ async function deleteToken(token) {
     );
 }
 
+// returns token if it exists
+async function checkTokenExistance(token) {
+    return await safeQuery(() =>
+        prisma.refreshToken.findUnique({
+            where: {
+                token: token
+            }
+        })
+    );
+}
+
 export default {
     insertToken,
-    deleteToken
+    deleteToken,
+    checkTokenExistance
 }
