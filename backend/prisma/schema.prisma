@@ -39,8 +39,8 @@ model History {
   userId     Int
   rentDate   DateTime
   returnDate DateTime?
-  device     Device    @relation(fields: [deviceId], references: [id])
-  user       User      @relation(fields: [userId], references: [id])
+  device     Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model refreshToken {
