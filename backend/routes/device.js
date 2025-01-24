@@ -1,11 +1,12 @@
 import { Router } from "express";
 import deviceController from "../controllers/device.js";
+import { adminAuthorization } from "../middleware/authCheck.js";
 
 const deviceRouter = Router();
 
-deviceRouter.get("/", deviceController.getAllDevices);
-deviceRouter.post("/", deviceController.insertDevice);
-deviceRouter.delete("/:deviceId", deviceController.deleteDevice);
-deviceRouter.put("/:deviceId", deviceController.updateDevice);
+deviceRouter.get("/", adminAuthorization, deviceController.getAllDevices);
+deviceRouter.post("/", adminAuthorization, deviceController.insertDevice);
+deviceRouter.delete("/:deviceId", adminAuthorization, deviceController.deleteDevice);
+deviceRouter.put("/:deviceId", adminAuthorization, deviceController.updateDevice);
 
 export default deviceRouter;

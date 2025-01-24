@@ -1,10 +1,11 @@
 import { Router } from "express";
 import historyController from "../controllers/history.js";
+import { adminAuthorization } from "../middleware/authCheck.js";
 
 const historyRouter = Router();
 
-historyRouter.get("/", historyController.getHistory);
-historyRouter.post("/", historyController.insertHistory);
-historyRouter.delete("/:historyId", historyController.deleteHistory);
+historyRouter.get("/", adminAuthorization, historyController.getHistory);
+historyRouter.post("/", adminAuthorization, historyController.insertHistory);
+historyRouter.delete("/:historyId", adminAuthorization, historyController.deleteHistory);
 
 export default historyRouter;
