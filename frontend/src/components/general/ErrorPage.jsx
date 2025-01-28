@@ -6,12 +6,14 @@ export default function ErrorPage() {
     console.error(error);
 
     return (
-        <div className="container d-flex flex-column justify-content-center align-items-center">
+        <div className="container d-flex flex-column justify-content-center align-items-center" style={{ "height": "100vh" }}>
             <h1>{error.status} {error.statusText}</h1>
-            <p>
+            <p className="alert alert-danger">
                 <i>{error.data}</i>
             </p>
-            <Link to="/">Go back to homepage</Link>
+            <Link to="/">
+                <button className="btn btn-primary">Go back to homepage</button>
+            </Link>
         </div>
     )
 }
