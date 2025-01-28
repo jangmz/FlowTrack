@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 
 export default function SideMenu({ isOpen, toggleMenu }) {
   // TODO: check for initial screen width and set isOpen according to that
-  // TODO: eliminate z-index when the width of the screen is > 800px
 
   return (
     <>
       {/* Sidebar */}
       <div
-        className={`bg-primary text-white d-flex flex-column ms-0 ${
+        className={`bg-secondary text-white d-flex flex-column ms-0 ${
           isOpen ? "side-menu-open" : "side-menu-closed"
         }`}
         style={{
@@ -29,68 +28,68 @@ export default function SideMenu({ isOpen, toggleMenu }) {
         {isOpen && (
           <div className="d-flex flex-column">
             {/* Menu Items */}
-            <ul className="list-unstyled flex-grow-1 p-3 mb-0">
-              <li className="mb-3">
-                <Link to="/" className="text-white text-decoration-none d-flex align-items-center">
+            <ul className="list-unstyled flex-grow-1 p-1 mb-0">
+              <li className="">
+                <Link to="/" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                     <FaHome className="me-2" />
                     Home
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="/devices/laptops" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="/devices/laptops" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                     <FaLaptop className="me-2" />
                     Laptops
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="/devices/tablets" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="/devices/tablets" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <FaTabletAlt className="me-2" />
                   Tablets
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="/devices/desktops" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="/devices/desktops" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <PiDesktopTower className="me-2" />
-                  Desktops
+                  Desktops (disabled)
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="/devices/projectors" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="/devices/projectors" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <FaVideo className="me-2" />
-                  Projectors
+                  Projectors (disabled)
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="#" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <FaDesktop className="me-2" />
-                  Monitors
+                  Monitors (disabled)
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="#" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <FiPrinter className="me-2" />
-                  Printers
+                  Printers (disabled)
                 </Link>
               </li>
-              <li className="mb-3">
-                <Link to="#" className="text-white text-decoration-none d-flex align-items-center">
+              <li className="">
+                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <RiFileList3Line className="me-2" />
-                  History
+                  History (disabled)
                 </Link>
               </li>
             </ul>
 
-            {/* Bottom Buttons */}
+            {/* Bottom Buttons - currently disabled */}
             <div className="d-flex flex-column p-3">
-              <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+              <button disabled className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
                 <FaPlus className="me-2" />
                 New Device
               </button>
-              <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+              <button disabled className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
                 <FaFileImport className="me-2" />
                 Import
               </button>
-              <button className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center">
+              <button disabled className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center">
                 <FaFileExport className="me-2" />
                 Export
               </button>
