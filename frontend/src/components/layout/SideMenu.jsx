@@ -50,13 +50,13 @@ export default function SideMenu({ isOpen, toggleMenu }) {
               <li className="">
                 <Link to="/devices/desktops" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <PiDesktopTower className="me-2" />
-                  Desktops (disabled)
+                  Desktops
                 </Link>
               </li>
               <li className="">
                 <Link to="/devices/projectors" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <FaVideo className="me-2" />
-                  Projectors (disabled)
+                  Projectors
                 </Link>
               </li>
               <li className="">
