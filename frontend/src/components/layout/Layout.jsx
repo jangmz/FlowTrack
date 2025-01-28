@@ -9,6 +9,7 @@ export default function Layout() {
         <>
             <Navbar />
             <div className="d-flex">
+                {/* TODO: if user is not logged in, side menu is not shown */}
                 <SideMenu isOpen={isSidebarOpen} toggleMenu={() => setIsSidebarOpen(!isSidebarOpen)} />
                 <main 
                     className="flex-grow-1"
