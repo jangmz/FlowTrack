@@ -5,12 +5,9 @@ import { FiPrinter } from "react-icons/fi";
 import { RiFileList3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-export default function SideMenu() {
-  const [isOpen, setIsOpen] = useState(true); 
+export default function SideMenu({ isOpen, toggleMenu }) {
   // TODO: check for initial screen width and set isOpen according to that
   // TODO: eliminate z-index when the width of the screen is > 800px
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <>
