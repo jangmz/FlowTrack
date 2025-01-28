@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport } from "react-icons/fa";
+import { FaHome, FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport } from "react-icons/fa";
 import { PiDesktopTower } from "react-icons/pi";
 import { FiPrinter } from "react-icons/fi";
 import { RiFileList3Line } from "react-icons/ri";
@@ -31,6 +30,12 @@ export default function SideMenu({ isOpen, toggleMenu }) {
           <div className="d-flex flex-column">
             {/* Menu Items */}
             <ul className="list-unstyled flex-grow-1 p-3 mb-0">
+              <li className="mb-3">
+                <Link to="/" className="text-white text-decoration-none d-flex align-items-center">
+                    <FaHome className="me-2" />
+                    Home
+                </Link>
+              </li>
               <li className="mb-3">
                 <Link to="/devices/laptops" className="text-white text-decoration-none d-flex align-items-center">
                     <FaLaptop className="me-2" />
