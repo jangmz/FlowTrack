@@ -1,15 +1,26 @@
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function DeviceTable({ devices }) {
+    const statusVariant = {
+        available: "success",
+        unavailable: "danger",
+        rented: "warning",
+        reserved: "primary",
+        damaged: "dark",
+        unknown: "secondary",
+    };
+
     // TODO: remove device from DB & context
     function deleteDevice(deviceId) {
         console.log("Device removed: ", deviceId);
     }
 
     // TODO: change status in DB & context
-    function handleStatusChange(e) {
-        console.log(e.target.value);
+    function handleStatusChange(status, deviceId) {
+        console.log("Status: ", status);
+        console.log("Device: ", deviceId);
     }
 
     return (
@@ -30,14 +41,27 @@ export default function DeviceTable({ devices }) {
                             <td className="text-start">{device.inventoryNumber}</td>
                             <td className="text-start">{device.model}</td>
                             <td className="text-start">
-                                <select name="status" id="status" value={device.status} onChange={(e) => handleStatusChange(e)} >
+                                {/*<select name="status" id="status" value={device.status} className="form-control w-50" onChange={(e) => handleStatusChange(e)} >
                                     <option value="available">available</option>
                                     <option value="unavailable">unavailable</option>
                                     <option value="rented">rented</option>
                                     <option value="reserved">reserved</option>
                                     <option value="damaged">damaged</option>
                                     <option value="unknown">unknown</option>
-                                </select>
+                                </select>*/}
+                                <Dropdown>
+                                    <Dropdown.Toggle variant={statusVariant[device.status]} className="w-50">
+                                        {device.status}
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item className="text-success" onClick={() => handleStatusChange("available", device.id)}>Available</Dropdown.Item>
+                                        <Dropdown.Item className="text-danger" onClick={() => handleStatusChange("unavailable", device.id)}>Unavailable</Dropdown.Item>
+                                        <Dropdown.Item className="text-warning" onClick={() => handleStatusChange("rented", device.id)}>Rented</Dropdown.Item>
+                                        <Dropdown.Item className="text-primary" onClick={() => handleStatusChange("reserved", device.id)}>Reserved</Dropdown.Item>
+                                        <Dropdown.Item className="text-danger" onClick={() => handleStatusChange("damaged", device.id)}>Damaged</Dropdown.Item>
+                                        <Dropdown.Item className="text-muted" onClick={() => handleStatusChange("unknown", device.id)}>Unknown</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </td>
                             <td className="text-start">{device.user.fullName}</td>
                             <td>
