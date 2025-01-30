@@ -8,6 +8,7 @@ import "./assets/css/index.scss";
 import routes from "./router";
 import Layout from './components/layout/Layout';
 import ErrorPage from './components/general/ErrorPage';
+import AuthProvider from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
