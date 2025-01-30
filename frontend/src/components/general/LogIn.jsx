@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function LogIn() {
+    const { logIn } = useAuth();
     const [logInUser, setlogInUser] = useState({
         username: "",
         password: ""
@@ -15,7 +16,7 @@ export default function LogIn() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(logInUser);
-        useAuth.logIn(logInUser);
+        logIn(logInUser);
     }
 
     return (
