@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function LogIn() {
-    const { logIn } = useAuth();
+    const { logIn, error } = useAuth();
     const [logInUser, setlogInUser] = useState({
         username: "",
         password: ""
@@ -33,6 +33,10 @@ export default function LogIn() {
                 </div>
                 <button type="submit" className="btn btn-primary" >Log In</button>
             </form>
+            {
+                error && 
+                <p className="alert alert-danger mt-4">{error}</p>
+            }
         </div>
     )
 }
