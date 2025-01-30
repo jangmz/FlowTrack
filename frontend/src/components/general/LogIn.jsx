@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export default function LogIn() {
+    const navigate = useNavigate();
     const { logIn, error } = useAuth();
+    const [localError, setLocalError] = useState();
     const [logInUser, setlogInUser] = useState({
         username: "",
         password: ""
@@ -13,10 +16,19 @@ export default function LogIn() {
         setlogInUser({ ...logInUser, [name]: value});
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         console.log(logInUser);
-        logIn(logInUser);
+
+        try {
+            const success = await logIn(logInUser);
+
+            // TODO: does not navigate on success
+            success ? navigate("/") : setLocalError(error || "Invalid username/password.");
+        } catch (error) {
+            console.error(error);
+            setLocalError(error.message);
+        }
     }
 
     return (
@@ -34,8 +46,8 @@ export default function LogIn() {
                 <button type="submit" className="btn btn-primary" >Log In</button>
             </form>
             {
-                error && 
-                <p className="alert alert-danger mt-4">{error}</p>
+                localError && 
+                <p className="alert alert-danger mt-4">{localError}</p>
             }
         </div>
     )
