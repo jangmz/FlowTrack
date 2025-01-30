@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LogIn() {
     const [logInUser, setlogInUser] = useState({
@@ -14,7 +15,7 @@ export default function LogIn() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(logInUser);
-        // TODO: call AuthContext for user authentication
+        useAuth.logIn(logInUser);
     }
 
     return (
