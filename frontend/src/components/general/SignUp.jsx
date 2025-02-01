@@ -1,6 +1,10 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function SignUp() {
+    const { signUp, arrErrors } = useAuth();
+    const navigate = useNavigate();
     const [signUpData, setSignUpData] = useState({
         fullName: "",
         username: "",
@@ -15,10 +19,16 @@ export default function SignUp() {
         setSignUpData({ ...signUpData, [name]: value});
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         console.log(signUpData);
-        // TODO: call AuthContext for creating a user
+        
+        try {
+            const success = await signUp(signUpData);
+            success && navigate("/log-in");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -54,6 +64,17 @@ export default function SignUp() {
                 </div>
                 <button type="submit" className="btn btn-primary" >Submit</button>
             </form>
+            
+            {
+                // displays validation errors from the server
+                arrErrors.length > 0 &&
+                <ul className="list-group mt-3">
+                    {arrErrors.map((error, index) => (
+                        <li key={index} className="list-group-item list-group-item-danger" >{error.msg}</li>
+                    ))}
+                </ul>
+            }
+            
         </div>
     )
 }
