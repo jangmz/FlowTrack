@@ -11,7 +11,6 @@ function AuthProvider({ children }) {
     const [error, setError] = useState(null);
 
     async function logIn(logInData) {
-        console.log(JSON.stringify(logInData));
         
         try {
             const response = await fetch(`${apiUrl}/auth/log-in`, {
@@ -23,7 +22,7 @@ function AuthProvider({ children }) {
             if (!response.ok) {
                 const data = await response.json();
                 console.error(`Error occured: ${data.error.message}`);
-                throw new Error("Failed to log in.");
+                throw new Error(data.error.message);
             }
 
             const data = await response.json();
@@ -41,7 +40,7 @@ function AuthProvider({ children }) {
             return true;
         } catch (error) {
             console.error(error);
-            setError(error.message);
+            setError(error);
             return false;
         }
     }
