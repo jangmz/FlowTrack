@@ -75,6 +75,38 @@ function AuthProvider({ children }) {
         }
     }
 
+    async function logOut() {
+        console.log("User logging out...");
+        try {
+            // remove refresh token from DB
+            const response = await fetch(`${apiUrl}/auth/log-out`, {
+                method: "DELETE",
+                headers: { "Authorization": `Bearer ${refreshToken}` }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error);
+            }
+
+            // remove data from localStorage
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("accessToken");
+
+            // remove from context
+            setUser(null);
+            setAccessToken("");
+            setRefreshToken("");
+
+            console.log("User logged out.");
+            return true;
+        } catch (error) {
+            console.error("Caught an error:", error.message);
+            setError(error.message);
+            return false;
+        }
+    }
+
     return (
         <AuthContext.Provider value={{ user, logIn, signUp, refreshToken, accessToken, error, arrErrors }}>
             { children }
