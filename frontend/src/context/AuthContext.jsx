@@ -81,7 +81,8 @@ function AuthProvider({ children }) {
             // remove refresh token from DB
             const response = await fetch(`${apiUrl}/auth/log-out`, {
                 method: "DELETE",
-                headers: { "Authorization": `Bearer ${refreshToken}` }
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: refreshToken })
             });
 
             if (!response.ok) {
@@ -108,7 +109,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, logIn, signUp, refreshToken, accessToken, error, arrErrors }}>
+        <AuthContext.Provider value={{ user, logIn, signUp, logOut, refreshToken, accessToken, error, arrErrors }}>
             { children }
         </AuthContext.Provider>
     )
