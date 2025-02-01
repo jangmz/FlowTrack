@@ -1,7 +1,12 @@
 import Logo from "../../../../Logo/FlowTrackLogo4.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import AdminMenuLinks from "./AdminMenuLinks";
+import GuestMenuLinks from "./GuestMenuLinks";
 
 export default function Navbar() {
+    const { user } = useAuth();
+
     return (
         <nav className="navbar navbar-expand-lg bg-primary">
             <div className="container-fluid">
@@ -13,17 +18,11 @@ export default function Navbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    </form>
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link text-white" to="/sign-up">Sign Up</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-white" to="/log-in">Log In</Link>
-                        </li>
-                    </ul>
+                    {
+                        user 
+                        ? <AdminMenuLinks />
+                        : <GuestMenuLinks />
+                    }
                 </div>
             </div>
         </nav>
