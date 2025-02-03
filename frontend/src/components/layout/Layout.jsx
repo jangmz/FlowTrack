@@ -2,15 +2,20 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import SideMenu from "./SideMenu";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Layout() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const { user } = useAuth();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(user ? true : false);
     return (
         <>
             <Navbar />
             <div className="d-flex">
-                {/* TODO: if user is not logged in, side menu is not shown */}
-                <SideMenu isOpen={isSidebarOpen} toggleMenu={() => setIsSidebarOpen(!isSidebarOpen)} />
+                {/* TODO: when user is signed in set "isSidebarOpen" to true */}
+                {
+                    user && 
+                    <SideMenu isOpen={isSidebarOpen} toggleMenu={() => setIsSidebarOpen(!isSidebarOpen)} />
+                }
                 <main 
                     className="flex-grow-1"
                     style={{
