@@ -1,5 +1,3 @@
-import Layout from "./components/layout/Layout";
-import ErrorPage from "./components/general/ErrorPage";
 import Home from "./pages/Home";
 import SignUp from "./components/general/SignUp";
 import LogIn from "./components/general/LogIn";
