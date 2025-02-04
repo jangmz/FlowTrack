@@ -4,12 +4,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 export default function DeviceTable({ devices }) {
     const statusVariant = {
-        available: "success",
-        unavailable: "danger",
-        rented: "warning",
-        reserved: "primary",
-        damaged: "dark",
-        unknown: "secondary",
+        Available: "success",
+        Unavailable: "danger",
+        Rented: "warning",
+        Reserved: "primary",
+        Damaged: "dark",
+        Unknown: "secondary",
     };
 
     // TODO: remove device from DB & context
