@@ -1,64 +1,27 @@
 import DeviceTable from "./DeviceTable";
-
-const laptops = [
-    {
-        id: 1,
-        inventoryNumber: 8000,
-        model: "ThinkPad T15",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },        
-        notes: "",
-    },
-    {
-        id: 2,
-        inventoryNumber: 8001,
-        model: "ThinkPad T15",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },
-        notes: "",
-    },
-    {
-        id: 3,
-        inventoryNumber: 8002,
-        model: "ThinkPad T15",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 4,
-        inventoryNumber: 8003,
-        model: "ThinkPad T15",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 5,
-        inventoryNumber: 8004,
-        model: "ThinkPad T15",
-        status: "rented",
-        user: {
-            fullName: "Sarah Doe",
-        },  
-        notes: "",
-    },
-]
+import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function Laptops() {
+    const { devices, laptops, loading, error } = useDeviceContext();
+
+    console.log("Laptops:",laptops);
 
     return (
         <div className="container-fluid d-flex flex-column align-items-center">
             <h1>Laptops</h1>
-            <DeviceTable devices={laptops} />
+            {
+                loading && 
+                <p className="alert alert-info">
+                    Please wait for the data to load...
+                </p>
+            }
+            {
+                error && 
+                <p className="alert alert-danger">
+                    {error}
+                </p>
+            }
+            {<DeviceTable devices={laptops} />}
         </div>
     )
 }
