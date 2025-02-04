@@ -81,10 +81,12 @@ export default function SideMenu({ isOpen, toggleMenu }) {
 
             {/* Bottom Buttons - currently disabled */}
             <div className="d-flex flex-column p-3">
-              <button disabled className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
-                <FaPlus className="me-2" />
-                New Device
-              </button>
+              <Link to="/devices/new" style={{ "textDecoration": "none" }}>
+                <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+                  <FaPlus className="me-2" />
+                  New Device
+                </button>
+              </Link>
               <button disabled className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
                 <FaFileImport className="me-2" />
                 Import
