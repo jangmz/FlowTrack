@@ -1,59 +1,17 @@
+import { useMemo } from "react";
 import DeviceTable from "./DeviceTable";
-
-const desktops = [
-    {
-        id: 1,
-        inventoryNumber: 6000,
-        model: "Lenovo ThinkCentre m710q",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },        
-        notes: "",
-    },
-    {
-        id: 2,
-        inventoryNumber: 6001,
-        model: "Lenovo ThinkCentre m710q",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },
-        notes: "",
-    },
-    {
-        id: 3,
-        inventoryNumber: 6002,
-        model: "Lenovo ThinkCentre m710q",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 4,
-        inventoryNumber: 6003,
-        model: "Lenovo ThinkCentre m710q",
-        status: "unknown",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 5,
-        inventoryNumber: 6004,
-        model: "Lenovo ThinkCentre m710q",
-        status: "rented",
-        user: {
-            fullName: "Sarah Doe",
-        },  
-        notes: "",
-    },
-]
+import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function Desktops() {
+    const { devices, loading, error } = useDeviceContext();
+
+    // re-filter only when devices change
+    const desktops = useMemo(() =>
+        devices.filter(device => device.deviceType === "Desktop"),
+        [devices]
+    );
+
+    console.log("Projectors:", desktops);
 
     return (
         <div className="container-fluid d-flex flex-column align-items-center">

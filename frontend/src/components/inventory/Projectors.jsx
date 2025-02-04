@@ -1,60 +1,17 @@
+import { useMemo } from "react";
+import { useDeviceContext } from "../../context/DevicesContext";
 import DeviceTable from "./DeviceTable";
 
-const projectors = [
-    {
-        id: 1,
-        inventoryNumber: 7000,
-        model: "Sony LT-550",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },        
-        notes: "",
-    },
-    {
-        id: 2,
-        inventoryNumber: 7001,
-        model: "Sony LT-550",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },
-        notes: "",
-    },
-    {
-        id: 3,
-        inventoryNumber: 7002,
-        model: "Sony LT-550",
-        status: "available",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 4,
-        inventoryNumber: 7003,
-        model: "Sony LT-550",
-        status: "unknown",
-        user: {
-            fullName: "John Doe",
-        },  
-        notes: "",
-    },
-    {
-        id: 5,
-        inventoryNumber: 7004,
-        model: "Sony LT-550",
-        status: "rented",
-        user: {
-            fullName: "Sarah Doe",
-        },  
-        notes: "",
-    },
-]
-
 export default function Projectors() {
+    const { devices, loading, error } = useDeviceContext();
 
+    // re-filter only when devices change
+    const projectors = useMemo(() =>
+        devices.filter(device => device.deviceType === "Projector"),
+        [devices]
+    );
+
+    console.log("Desktops:", projectors);
     return (
         <div className="container-fluid d-flex flex-column align-items-center">
             <h1>Projectors</h1>
