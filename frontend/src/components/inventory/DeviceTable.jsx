@@ -63,7 +63,7 @@ export default function DeviceTable({ devices }) {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
-                            <td className="text-start">{device.user.fullName}</td>
+                            <td className="text-start">{device.user ? device.user.fullName : "/"}</td>
                             <td>
                                 <div className="d-flex gap-2 align-items-center justify-content-end">
                                     <Link to={`/devices/laptops/${device.id}`}>
