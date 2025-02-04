@@ -40,6 +40,10 @@ export function checkAndUpdateToken(token) {
             console.log("Token renewed.");
         } catch (error) {
             console.error("Error occured: ", error.message);
+            return false;
         }
     }
+
+    console.log("Token is valid.");
+    return true;
 }
