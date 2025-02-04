@@ -1,8 +1,15 @@
+import { useMemo } from "react";
 import DeviceTable from "./DeviceTable";
 import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function Laptops() {
-    const { laptops, loading, error } = useDeviceContext();
+    const { devices, loading, error } = useDeviceContext();
+
+    // re-filter only when devices change
+    const laptops = useMemo(() =>
+        devices.filter(device => device.deviceType === "Laptop"),
+        [devices]
+    );
 
     console.log("Laptops:",laptops);
 
