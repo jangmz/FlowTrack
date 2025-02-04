@@ -41,25 +41,17 @@ export default function DeviceTable({ devices }) {
                             <td className="text-start">{device.inventoryNumber}</td>
                             <td className="text-start">{device.model}</td>
                             <td className="text-start">
-                                {/*<select name="status" id="status" value={device.status} className="form-control w-50" onChange={(e) => handleStatusChange(e)} >
-                                    <option value="available">available</option>
-                                    <option value="unavailable">unavailable</option>
-                                    <option value="rented">rented</option>
-                                    <option value="reserved">reserved</option>
-                                    <option value="damaged">damaged</option>
-                                    <option value="unknown">unknown</option>
-                                </select>*/}
                                 <Dropdown>
                                     <Dropdown.Toggle variant={statusVariant[device.status]} className="w-50">
                                         {device.status}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item className="text-success" onClick={() => handleStatusChange("available", device.id)}>Available</Dropdown.Item>
-                                        <Dropdown.Item className="text-danger" onClick={() => handleStatusChange("unavailable", device.id)}>Unavailable</Dropdown.Item>
-                                        <Dropdown.Item className="text-warning" onClick={() => handleStatusChange("rented", device.id)}>Rented</Dropdown.Item>
-                                        <Dropdown.Item className="text-primary" onClick={() => handleStatusChange("reserved", device.id)}>Reserved</Dropdown.Item>
-                                        <Dropdown.Item className="text-danger" onClick={() => handleStatusChange("damaged", device.id)}>Damaged</Dropdown.Item>
-                                        <Dropdown.Item className="text-muted" onClick={() => handleStatusChange("unknown", device.id)}>Unknown</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-success text-white" onClick={() => handleStatusChange("Available", device.id)}>Available</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-danger text-white" onClick={() => handleStatusChange("Unavailable", device.id)}>Unavailable</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-warning text-dark" onClick={() => handleStatusChange("Rented", device.id)}>Rented</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-primary text-white" onClick={() => handleStatusChange("Reserved", device.id)}>Reserved</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-danger text-white" onClick={() => handleStatusChange("Damaged", device.id)}>Damaged</Dropdown.Item>
+                                        <Dropdown.Item className="mb-1 bg-secondary text-light" onClick={() => handleStatusChange("Unknown", device.id)}>Unknown</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
