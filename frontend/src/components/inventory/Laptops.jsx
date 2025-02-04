@@ -2,7 +2,7 @@ import DeviceTable from "./DeviceTable";
 import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function Laptops() {
-    const { devices, laptops, loading, error } = useDeviceContext();
+    const { laptops, loading, error } = useDeviceContext();
 
     console.log("Laptops:",laptops);
 
