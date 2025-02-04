@@ -1,8 +1,10 @@
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
+import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function DeviceTable({ devices }) {
+    const { updateDeviceStatus } = useDeviceContext();
     const statusVariant = {
         Available: "success",
         Unavailable: "danger",
@@ -17,10 +19,8 @@ export default function DeviceTable({ devices }) {
         console.log("Device removed: ", deviceId);
     }
 
-    // TODO: change status in DB & context
     function handleStatusChange(status, deviceId) {
-        console.log("Status: ", status);
-        console.log("Device: ", deviceId);
+        updateDeviceStatus(status, deviceId);
     }
 
     return (
