@@ -9,6 +9,7 @@ import routes from "./router";
 import Layout from './components/layout/Layout';
 import ErrorPage from './components/general/ErrorPage';
 import AuthProvider from './context/AuthContext';
+import { DeviceProvider } from './context/DevicesContext';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <DeviceProvider>
+        <RouterProvider router={router} />
+      </DeviceProvider>
     </AuthProvider>
   </StrictMode>,
 )
