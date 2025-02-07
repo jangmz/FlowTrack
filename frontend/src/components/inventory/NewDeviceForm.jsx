@@ -13,9 +13,10 @@ const deviceTypes = [
 export default function NewDeviceForm() {
     const { addNewDevice } = useDeviceContext();
     const [error, setError] = useState(null);
+    const [confirmation, setConfirmation] = useState(null);
     const [newDevice, setNewDevice] = useState({
-        deviceType: "",
-        inventoryNumber: 0 ,
+        deviceType: "Laptop",
+        inventoryNumber: 0,
         model: "",
         serialNumber: "",
         status: "Available"
@@ -32,6 +33,14 @@ export default function NewDeviceForm() {
 
         try {
             await addNewDevice(newDevice);
+            setConfirmation("New device added successfully.");
+            setNewDevice({
+                deviceType: "Laptop",
+                inventoryNumber: 0,
+                model: "",
+                serialNumber: "",
+                status: "Available"
+            })
         } catch (error) {
             console.error(error);
             setError(error.message);
@@ -44,6 +53,10 @@ export default function NewDeviceForm() {
             {
                 error &&
                 <p className="alert alert-danger">{error}</p>
+            }
+            {
+                confirmation &&
+                <p className="alert alert-success">{confirmation}</p>
             }
             <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
                 <FormInput 
