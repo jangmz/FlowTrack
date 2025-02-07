@@ -1,0 +1,83 @@
+import { useState } from "react";
+import FormInput from "../general/FormInput";
+import DropdownSelection from "../general/DropdownSelection";
+import { useDeviceContext } from "../../context/DevicesContext";
+
+const deviceTypes = [
+    "Laptop",
+    "Desktop",
+    "Tablet",
+    "Projector"
+];
+
+export default function NewDeviceForm() {
+    const { addNewDevice } = useDeviceContext();
+    const [error, setError] = useState(null);
+    const [newDevice, setNewDevice] = useState({
+        deviceType: "",
+        inventoryNumber: 0 ,
+        model: "",
+        serialNumber: "",
+        status: "Available"
+    });
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setNewDevice(prev => ({ ...prev, [name]: value }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        //console.log("Submit data:", newDevice);
+
+        try {
+            await addNewDevice(newDevice);
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+        }
+    }
+
+    return (
+        <div className="container d-flex flex-column align-items-center">
+            <h1>Add new device</h1>
+            {
+                error &&
+                <p className="alert alert-danger">{error}</p>
+            }
+            <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
+                <FormInput 
+                    inputName={"inventoryNumber"}
+                    inputType={"number"}
+                    labelText={"Inventory number"}
+                    inputValue={newDevice.inventoryNumber}
+                    onChange={ handleChange }
+                />
+                <FormInput
+                    inputName={"model"}
+                    inputType={"text"}
+                    labelText={"Device model"}
+                    inputValue={newDevice.model}
+                    onChange={ handleChange }
+                />
+                <FormInput
+                    inputName={"serialNumber"}
+                    inputType={"text"}
+                    labelText={"Serial number"}
+                    inputValue={newDevice.serialNumber}
+                    onChange={ handleChange }
+                />
+                <DropdownSelection 
+                    label={"Device type"}
+                    name={"deviceType"}
+                    selectValue={newDevice.deviceType}
+                    values={deviceTypes}
+                    onChange={ handleChange }
+                />
+                <button type="submit" className="btn btn-primary">
+                    Add new device
+                </button>
+            </form>
+        </div>
+    );
+}
