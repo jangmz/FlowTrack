@@ -10,8 +10,7 @@ export function useDeviceContext() {
 
 export function DeviceProvider({ children }) {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken") || null);
-    const {allDevices, loading, error} = fetchDevices();
+    const { allDevices, loading, error } = fetchDevices();
     const [devices, setDevices] = useState(allDevices);
     
     useEffect(() => {
@@ -21,12 +20,13 @@ export function DeviceProvider({ children }) {
 
     // token expiry check
     async function checkToken() {
+        const accessToken = localStorage.getItem("accessToken");
         if (isTokenExpired(accessToken)) {
             console.log("Current token is expired, renewing...");
             try {
                 await refreshAccessToken();
-                const newAT = localStorage.getItem("accessToken");
-                setAccessToken(newAT);
+                //const newAT = localStorage.getItem("accessToken");
+                //setAccessToken(newAT);
                 console.log("Token renewed.");
             } catch (error) {
                 console.error("Error caught:", error.message);
@@ -42,6 +42,7 @@ export function DeviceProvider({ children }) {
         deviceData.status = status;
 
         try {
+            const accessToken = localStorage.getItem("accessToken");
             const response = await fetch(`${apiUrl}/api/devices/${deviceId}`, {
                 method: "PUT",
                 headers: { 
@@ -66,12 +67,52 @@ export function DeviceProvider({ children }) {
         }
     }
 
+    // add new device
+    async function addNewDevice(newDevice) {
+        await checkToken();
+
+        console.log("Adding new device to the database...");
+
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const response = await fetch(`${apiUrl}/api/devices`, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(newDevice)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                //console.log(errData.error.message);
+
+                let serverErr;
+                errData.error 
+                ? serverErr = new Error(errData.error.message)
+                : serverErr = new Error(errData.message);
+                
+                throw serverErr;
+            }
+
+            const resData = await response.json();
+
+            // update state
+            setDevices(prevDevices => [...prevDevices, resData]);
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
     return (
         <DeviceContext.Provider value={{ 
             devices, 
             loading, 
             error,
-            updateDeviceStatus
+            updateDeviceStatus,
+            addNewDevice,
         }}>
             { children }
         </DeviceContext.Provider>
