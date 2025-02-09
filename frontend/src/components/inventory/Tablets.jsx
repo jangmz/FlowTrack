@@ -20,8 +20,7 @@ export default function Tablets() {
             navigate("/log-in");
         }
     }, []);
-
-    console.log("Tablets:", tablets);
+    
     return (
         <div className="container-fluid d-flex flex-column align-items-center">
             {
