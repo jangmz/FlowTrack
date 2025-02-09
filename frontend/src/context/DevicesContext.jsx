@@ -137,6 +137,7 @@ export function DeviceProvider({ children }) {
             setDevices(prevDevices => 
                 prevDevices.filter(device => device.id !== deviceId)
             );
+            console.log("Device deleted, state updated.");
         } catch (error) {
             console.error("Caught error:", error.message);
             throw new Error(error.message);
