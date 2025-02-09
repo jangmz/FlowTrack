@@ -14,9 +14,7 @@ export default function DeviceTable({ devices }) {
         Unknown: "secondary",
     };
 
-    // TODO: remove device from DB & context
     function handleDeleteDevice(deviceId) {
-        console.log("Device removed: ", deviceId);
         deleteDevice(deviceId);
     }
 
