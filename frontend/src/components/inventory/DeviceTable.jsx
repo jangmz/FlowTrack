@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function DeviceTable({ devices }) {
-    const { updateDeviceStatus } = useDeviceContext();
+    const { updateDeviceStatus, deleteDevice } = useDeviceContext();
     const statusVariant = {
         Available: "success",
         Unavailable: "danger",
@@ -15,8 +15,9 @@ export default function DeviceTable({ devices }) {
     };
 
     // TODO: remove device from DB & context
-    function deleteDevice(deviceId) {
+    function handleDeleteDevice(deviceId) {
         console.log("Device removed: ", deviceId);
+        deleteDevice(deviceId);
     }
 
     function handleStatusChange(status, deviceId) {
@@ -61,8 +62,7 @@ export default function DeviceTable({ devices }) {
                                     <Link to={`/devices/laptops/${device.id}`}>
                                         <button className="btn btn-outline-primary d-flex align-items-center justify-cotnent-center"><FaRegEdit /></button>
                                     </Link>
-                                    <button onClick={(e) => deleteDevice(device.id)} className="btn btn-outline-danger d-flex align-items-center justify-cotnent-center"><FaTrashAlt /></button>
-                                    
+                                    <button onClick={ (e) => handleDeleteDevice(device.id) } className="btn btn-outline-danger d-flex align-items-center justify-cotnent-center"><FaTrashAlt /></button>
                                 </div>
                             </td>
                         </tr>
