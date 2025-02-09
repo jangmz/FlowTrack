@@ -18,7 +18,6 @@ export default function LogIn() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(logInUser);
 
         try {
             const success = await logIn(logInUser);
