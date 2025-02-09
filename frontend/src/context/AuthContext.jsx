@@ -7,7 +7,6 @@ function AuthProvider({ children }) {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [user, setUser] = useState();
     const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refreshToken") || "");
-    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken") || "");
     const [error, setError] = useState(null);
     const [arrErrors, setArrErrors] = useState([]); // for array of validation errors on sign up
 
@@ -32,7 +31,6 @@ function AuthProvider({ children }) {
             localStorage.setItem("refreshToken", data.refreshToken);
             localStorage.setItem("accessToken", data.accessToken);
             setRefreshToken(data.refreshToken);
-            setAccessToken(data.accessToken);
 
             // set user data
             const { id, username, role, email, fullName } = jwtDecode(data.refreshToken);
@@ -96,7 +94,6 @@ function AuthProvider({ children }) {
 
             // remove from context
             setUser(null);
-            setAccessToken("");
             setRefreshToken("");
 
             console.log("User logged out.");
@@ -109,7 +106,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, logIn, signUp, logOut, refreshToken, accessToken, error, arrErrors }}>
+        <AuthContext.Provider value={{ user, logIn, signUp, logOut, refreshToken, error, arrErrors }}>
             { children }
         </AuthContext.Provider>
     )
