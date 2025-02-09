@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+/*import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { isTokenExpired, refreshAccessToken } from "../utility/tokenUtility";
 
 export default function fetchDevices() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const { user } = useAuth();
-    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken") || null);
     const [allDevices, setAllDevices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +12,7 @@ export default function fetchDevices() {
     useEffect(() => {
         async function fetchData() {
             try {
-                let token = accessToken;
+                let token = localStorage.getItem("accessToken");
 
                 // token expiration
                 console.log("Checking token expiration...");
@@ -40,11 +39,42 @@ export default function fetchDevices() {
                 setError(error.message);
             } finally {
                 setLoading(false);
+                setError(null);
             }
         }
 
         fetchData();
-    }, [accessToken, user, apiUrl])
+    }, [user])
 
     return { allDevices, loading, error };
+}
+    */
+import { isTokenExpired, refreshAccessToken } from "../utility/tokenUtility";
+
+export async function fetchDevices() {
+    const apiUrl = import.meta.env.VITE_API_URL;
+    let token = localStorage.getItem("accessToken");
+
+    try {
+        console.log("Checking token expiration...");
+        if (isTokenExpired(token)) {
+            console.log("Current token is expired, renewing...");
+            await refreshAccessToken();
+            token = localStorage.getItem("accessToken");
+        }
+
+        const response = await fetch(`${apiUrl}/api/devices`, {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed fetching data from API.");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching devices:", error);
+        throw error;
+    }
 }
