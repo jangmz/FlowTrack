@@ -6,12 +6,13 @@ export default function DeviceOverviewCard({ title, stock, icon }) {
                 <img src={icon} style={{ "width": "25px"}}/>
             </div>
             <div className="card-body">
-                <p className="card-text mb-0 text-success-emphasis">Available: {stock.available}</p>
-                <p className="card-text mb-0 text-danger-emphasis">Unavailable: {stock.unavailable}</p>
-                <p className="card-text mb-0 text-warning-emphasis">Rented: {stock.rented}</p>
-                <p className="card-text mb-0 text-info-emphasis">Reserved: {stock.reserved}</p>
-                <p className="card-text mb-0 text-danger-emphasis">Damaged: {stock.damaged}</p>
-                <p className="card-text mb-0 text-dark-emphasis">Unknown: {stock.unknown}</p>
+                {
+                    Object.entries(stock).map(([status, count]) => (
+                        <p key={status} className="card-text mb-0">
+                            {status}: {count}
+                        </p>
+                    ))
+                }                
             </div>
             <div className="card-footer">
                 <p className="card-text mb-0" style={{ "color": "#005f84"}}>Total: {stock.total}</p>

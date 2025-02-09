@@ -149,6 +149,28 @@ export function DeviceProvider({ children }) {
         }
     }
 
+    // count statuses of each device type
+    function countDeviceStatuses(deviceType) {
+        const allStatuses = ["Available", "Unavailable", "Rented", "Reserved", "Damaged", "Unknown"];
+        
+        // initialize all statuses to 0
+        const statusCounts = allStatuses.reduce((acc, status) => {
+            acc[status] = 0;
+            return acc;
+        }, {});
+
+        // count current occurrences
+        devices
+            .filter(device => device.deviceType === deviceType)
+            .forEach(device => {
+                if (statusCounts.hasOwnProperty(device.status)) {
+                    statusCounts[device.status]++;
+                }
+            });
+
+        return statusCounts;
+    }
+
     return (
         <DeviceContext.Provider value={{ 
             devices, 
@@ -157,6 +179,7 @@ export function DeviceProvider({ children }) {
             updateDeviceStatus,
             addNewDevice,
             deleteDevice,
+            countDeviceStatuses,
         }}>
             { children }
         </DeviceContext.Provider>
