@@ -32,15 +32,20 @@ export default function Home() {
 
     return (
         <div className="cotnainer-fluid d-flex flex-column align-items-center">
-            <h1>Devices Overview Cards</h1>
-            <div className="container-fluid d-flex flex-wrap">
-                <DeviceOverviewCard title={"Laptops"} icon={laptopIcon} stock={stock} />
-                <DeviceOverviewCard title={"Desktops"} icon={desktopIcon} stock={stock} />
-                <DeviceOverviewCard title={"Tablets"} icon={tabletIcon} stock={stock} />
-                <DeviceOverviewCard title={"Projectors"} icon={projectorIcon} stock={stock} />
-                <DeviceOverviewCard title={"Monitors"} icon={monitorIcon} stock={stock} />
-                <DeviceOverviewCard title={"Printers"} icon={printerIcon} stock={stock} />
-            </div>
+            {
+                user &&
+                <>
+                    <h1>Devices Overview Cards</h1>
+                    <div className="container-fluid d-flex flex-wrap">
+                        <DeviceOverviewCard title={"Laptops"} icon={laptopIcon} stock={stock} />
+                        <DeviceOverviewCard title={"Desktops"} icon={desktopIcon} stock={stock} />
+                        <DeviceOverviewCard title={"Tablets"} icon={tabletIcon} stock={stock} />
+                        <DeviceOverviewCard title={"Projectors"} icon={projectorIcon} stock={stock} />
+                        <DeviceOverviewCard title={"Monitors"} icon={monitorIcon} stock={stock} />
+                        <DeviceOverviewCard title={"Printers"} icon={printerIcon} stock={stock} />
+                    </div>
+                </>
+            }
         </div>
     )
 }
