@@ -5,6 +5,9 @@ import tabletIcon from "../assets/icons/tablet.png";
 import projectorIcon from "../assets/icons/projector.png";
 import printerIcon from "../assets/icons/printer.png";
 import monitorIcon from "../assets/icons/monitor.png";
+import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const stock = {
     available: 9,
@@ -17,6 +20,16 @@ const stock = {
 }
 
 export default function Home() {
+    // TODO: count device statuses from DB
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/log-in");
+        }
+    }, []);
+
     return (
         <div className="cotnainer-fluid d-flex flex-column align-items-center">
             <h1>Devices Overview Cards</h1>
