@@ -106,6 +106,43 @@ export function DeviceProvider({ children }) {
         }
     }
 
+    // delete device
+    async function deleteDevice(deviceId) {
+        await checkToken();
+
+        console.log(`Deleting device with ID: ${deviceId}`);
+
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const response = await fetch(`${apiUrl}/api/devices/${deviceId}`, {
+                method: "DELETE",
+                headers: { "Authorization": `Bearer ${accessToken}` }
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                //console.log(errData.error.message);
+
+                let serverErr;
+                errData.error 
+                ? serverErr = new Error(errData.error.message)
+                : serverErr = new Error(errData.message);
+                
+                throw serverErr;
+            }
+
+            const resData = await response.json();
+
+            // update state -> return all except the removed one
+            setDevices(prevDevices => 
+                prevDevices.filter(device => device.id !== deviceId)
+            );
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
     return (
         <DeviceContext.Provider value={{ 
             devices, 
@@ -113,6 +150,7 @@ export function DeviceProvider({ children }) {
             error,
             updateDeviceStatus,
             addNewDevice,
+            deleteDevice,
         }}>
             { children }
         </DeviceContext.Provider>
