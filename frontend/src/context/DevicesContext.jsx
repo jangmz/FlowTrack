@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext, createContext } from "react";
-import fetchDevices from "../hooks/fetchDevices";
+import { useState, useEffect, useContext, createContext, useCallback } from "react";
+import { fetchDevices } from "../hooks/fetchDevices";
 import { isTokenExpired, refreshAccessToken } from "../utility/tokenUtility";
 
 const DeviceContext = createContext();
@@ -10,13 +10,26 @@ export function useDeviceContext() {
 
 export function DeviceProvider({ children }) {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const { allDevices, loading, error } = fetchDevices();
-    const [devices, setDevices] = useState(allDevices);
+    const [devices, setDevices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // fetch devices and update state
+    async function loadDevices() {
+        try {
+            setLoading(true);
+            const allDevices = await fetchDevices();
+            setDevices(allDevices);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
     
     useEffect(() => {
-        setDevices(allDevices);
-
-    }, [allDevices]);
+        loadDevices();
+    }, []);
 
     // token expiry check
     async function checkToken() {
@@ -70,7 +83,6 @@ export function DeviceProvider({ children }) {
     // add new device
     async function addNewDevice(newDevice) {
         await checkToken();
-
         console.log("Adding new device to the database...");
 
         try {
@@ -86,20 +98,13 @@ export function DeviceProvider({ children }) {
 
             if (!response.ok) {
                 const errData = await response.json();
-                //console.log(errData.error.message);
-
-                let serverErr;
-                errData.error 
-                ? serverErr = new Error(errData.error.message)
-                : serverErr = new Error(errData.message);
-                
-                throw serverErr;
+                throw new Error(errData.error?.message || errData.message);
             }
 
-            const resData = await response.json();
+            // refresh device list
+            await loadDevices();
 
-            // update state
-            setDevices(prevDevices => [...prevDevices, resData]);
+            console.log("Device added, state updated.");
         } catch (error) {
             console.error("Caught error:", error.message);
             throw new Error(error.message);
