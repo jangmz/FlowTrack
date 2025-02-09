@@ -39,8 +39,6 @@ export default function NewDeviceForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        //console.log("Submit data:", newDevice);
-
         try {
             await addNewDevice(newDevice);
             setConfirmation("New device added successfully.");
