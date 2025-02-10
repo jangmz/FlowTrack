@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, createContext, useCallback } from "react";
 import { fetchDevices } from "../hooks/fetchDevices";
 import { isTokenExpired, refreshAccessToken } from "../utility/tokenUtility";
+import { useAuth } from "./AuthContext";
 
 const DeviceContext = createContext();
 
@@ -10,6 +11,7 @@ export function useDeviceContext() {
 
 export function DeviceProvider({ children }) {
     const apiUrl = import.meta.env.VITE_API_URL;
+    const { user } = useAuth();
     const [devices, setDevices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -28,8 +30,8 @@ export function DeviceProvider({ children }) {
     }
     
     useEffect(() => {
-        loadDevices();
-    }, []);
+        if (user) loadDevices();
+    }, [user]);
 
     // token expiry check
     async function checkToken() {
