@@ -31,19 +31,3 @@ export async function refreshAccessToken() {
         throw error;
     }
 }
-
-export function checkAndUpdateToken(token) {
-    if (isTokenExpired(token)) {
-        console.log("Token expired, renewing...");
-        try {
-            refreshAccessToken();
-            console.log("Token renewed.");
-        } catch (error) {
-            console.error("Error occured: ", error.message);
-            return false;
-        }
-    }
-
-    console.log("Token is valid.");
-    return true;
-}
