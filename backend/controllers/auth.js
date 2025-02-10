@@ -53,6 +53,7 @@ async function logIn(req, res, next) {
         }
 
         // generate JWT (access + refresh)
+        console.log("User before token generation:", user);
         const accessToken = generateAccessToken(user);
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 
@@ -98,8 +99,18 @@ async function refreshToken(req, res, next) {
             return res.status(500).json({ message: "Failed to refresh access token.", error: err });
         }
 
-        console.log("Generating new access token for user: ", user);
-        const accessToken = generateAccessToken(user);
+        const userPayload = {
+            id: user.id,
+            fullName: user.fullName,
+            role: user.role,
+            username: user.username,
+            password: user.password,
+            email: user.email
+        }
+        //console.log("Generating new access token for user: ", userPayload);
+        const accessToken = generateAccessToken(userPayload);
+
+        console.log("New access token generated:", accessToken);
 
         res.json({ accessToken });
     })
