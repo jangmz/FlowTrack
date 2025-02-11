@@ -32,11 +32,10 @@ export default function EditDeviceForm() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            if (updateDevice()) {
-                setMessage("Data successfully updated.");
-            }
+            updateDevice(device);
+            setMessage("Device successfully updated.");
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
             setError(error.message);
         }
     }
