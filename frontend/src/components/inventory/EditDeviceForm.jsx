@@ -12,18 +12,21 @@ export default function EditDeviceForm() {
     const { user } = useAuth();
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
-    const [device, setDevice] = useState(() => {
-        const tempDevice = devices.filter(dev => dev.id === parseInt(params.deviceId));
-        return tempDevice[0];
-    });
+    const originalDevice = devices.find(dev => dev.id === parseInt(params.deviceId));
+    const [device, setDevice] = useState(originalDevice);
 
     useEffect(() => {
         if (!user) navigate("/log-in");
+        console.log(device);
     }, []);
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setDevice((prev) => ({...prev, [name]:[value]}));
+        setDevice((prev) => ({...prev, [name]: value}));
+    }
+
+    function revertData() {
+        setDevice(originalDevice);
     }
 
     async function handleSubmit(e) {
@@ -34,7 +37,7 @@ export default function EditDeviceForm() {
 
     return (
         <div className="container d-flex flex-column align-items-center">
-            <h1>Edit device [inventory number]</h1>
+            <h1>Edit {device.deviceType} {device.inventoryNumber}</h1>
             {
                 error && <p className="alert alert-danger">{error}</p>
             }
@@ -69,6 +72,14 @@ export default function EditDeviceForm() {
                     selectValue={device.deviceType}
                     onChange={ handleChange }
                 />
+                <div className="d-flex justify-content-between">
+                    <button type="submit" className="btn btn-primary">
+                        Save
+                    </button>
+                    <button onClick={ revertData } type="button" className="btn btn-danger">
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     )
