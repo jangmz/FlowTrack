@@ -9,7 +9,7 @@ export default function ErrorPage() {
         <div className="container d-flex flex-column justify-content-center align-items-center" style={{ "height": "100vh" }}>
             <h1>{error.status} {error.statusText}</h1>
             <p className="alert alert-danger">
-                <i>{error.data}</i>
+                <i>{error.message}</i>
             </p>
             <Link to="/">
                 <button className="btn btn-primary">Go back to homepage</button>
