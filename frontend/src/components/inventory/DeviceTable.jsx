@@ -2,8 +2,10 @@ import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDeviceContext } from "../../context/DevicesContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DeviceTable({ devices }) {
+    const navigate = useNavigate();
     const { updateDeviceStatus, deleteDevice } = useDeviceContext();
     const [selectedDevices, setSelectedDevices] = useState([]);
 
@@ -34,6 +36,11 @@ export default function DeviceTable({ devices }) {
     // button to delete device
     function handleDeleteDevice(deviceId) {
         deleteDevice(deviceId);
+    }
+
+    // open edit form
+    function handleEditDevice(deviceId) {
+        navigate(`/devices/edit/${deviceId}`);
     }
 
     // changes device status
@@ -114,7 +121,7 @@ export default function DeviceTable({ devices }) {
                                 <td className="text-start">{device.user ? device.user.fullName : "/"}</td>
                                 <td>
                                     <div className="d-flex gap-2 align-items-center justify-content-end">
-                                        <button className="btn btn-outline-primary d-flex align-items-center justify-cotnent-center">
+                                        <button onClick={(e) => handleEditDevice(device.id)} className="btn btn-outline-primary d-flex align-items-center justify-cotnent-center">
                                             <FaRegEdit />
                                         </button>
                                         <button onClick={ (e) => handleDeleteDevice(device.id) } className="btn btn-outline-danger d-flex align-items-center justify-cotnent-center">
