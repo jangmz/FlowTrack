@@ -31,8 +31,14 @@ export default function EditDeviceForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log("Edited data:", device);
-        // call updateDevice()
+        try {
+            if (updateDevice()) {
+                setMessage("Data successfully updated.");
+            }
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+        }
     }
 
     return (
