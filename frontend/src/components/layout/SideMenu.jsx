@@ -1,4 +1,4 @@
-import { FaHome, FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport } from "react-icons/fa";
+import { FaHome, FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport, FaUserPlus, FaUser } from "react-icons/fa";
 import { PiDesktopTower } from "react-icons/pi";
 import { FiPrinter } from "react-icons/fi";
 import { RiFileList3Line } from "react-icons/ri";
@@ -81,6 +81,12 @@ export default function SideMenu({ isOpen, toggleMenu }) {
 
             {/* Bottom Buttons - currently disabled */}
             <div className="d-flex flex-column p-3">
+              <Link to="/clients/new" style={{ "textDecoration": "none" }}>
+                <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+                  <FaUserPlus className="me-2" />
+                  New Client
+                </button>
+              </Link>
               <Link to="/devices/new" style={{ "textDecoration": "none" }}>
                 <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
                   <FaPlus className="me-2" />
