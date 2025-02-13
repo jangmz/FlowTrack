@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import ErrorPage from './components/general/ErrorPage';
 import AuthProvider from './context/AuthContext';
 import { DeviceProvider } from './context/DevicesContext';
+import { ClientsProvider } from './context/ClientsContext';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <DeviceProvider>
-        <RouterProvider router={router} />
+        <ClientsProvider>
+          <RouterProvider router={router} />
+        </ClientsProvider>
       </DeviceProvider>
     </AuthProvider>
   </StrictMode>,
