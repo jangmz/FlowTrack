@@ -173,6 +173,41 @@ export function DeviceProvider({ children }) {
         return statusCounts;
     }
 
+    // update device data
+    async function updateDevice(deviceData) {
+        // TODO: unique constraint violation does not display as error on EditDeviceForm page
+        // TODO: devices list is not refreshed once data is successfully updated in DB
+        await checkToken();
+        console.log("Updating device data...");
+
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const response = await fetch(`${apiUrl}/api/devices/${deviceData.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(deviceData)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                console.log(response.json());
+                console.log(errData);
+                throw new Error(errData.error?.message || errData.message);
+            }
+
+            // refresh device list 
+            await loadDevices();
+
+            console.log("Device data updated, state refreshed.");
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
     return (
         <DeviceContext.Provider value={{ 
             devices, 
@@ -182,6 +217,7 @@ export function DeviceProvider({ children }) {
             addNewDevice,
             deleteDevice,
             countDeviceStatuses,
+            updateDevice,
         }}>
             { children }
         </DeviceContext.Provider>
