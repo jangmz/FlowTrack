@@ -2,74 +2,147 @@ GET http://localhost:5000/api/
 
 ########################################## DEVICES
 GET http://localhost:5000/api/devices
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
 ### insert device
 POST http://localhost:5000/api/devices
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 Content-Type: application/json
 
 {
     "deviceType": "Laptop",
     "model": "Lenovo T15",
     "serialNumber": "AB0789788",
-    "inventoryNumber": 8001,
+    "inventoryNumber": 8003,
     "status": "Available"
 }
 
 ### update device data
 PUT http://localhost:5000/api/devices/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 Content-Type: application/json
 
 {
     "deviceType": "Laptop",
     "model": "Lenovo T15",
-    "serialNumber": "AB098089",
+    "serialNumber": "AB0000000",
     "inventoryNumber": 8000,
     "status": "Unavailable"
 }
 
 ### delete device
-DELETE http://localhost:5000/api/devices/2
+DELETE http://localhost:5000/api/devices/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
 ############################################# USERS
 GET http://localhost:5000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
 ### insert user
 POST http://localhost:5000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IiQyYSQxMCRON1pVdy9LalZlNldvSmw3cy9OUkllWTV3RFJFM1NraVBDV0RHQ2ZjSjBDdXlLa1Jab3VoRyIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTczNzcxMjM1NCwiZXhwIjoxNzM3NzE0MTU0fQ.vAyq9y-6jTnPHeWxMDk-pPR06jO0_57687pD6vewg6U
 Content-Type: application/json
 
 {
-    "fullName": "Test User",
+    "fullName": "Sarah Doe",
     "role": "user",
-    "username": "testuser2",
-    "password": "testuser",
-    "email": "test2@user.com"
+    "username": "sarahdoe",
+    "password": "Sarahdoe1234!",
+    "email": "sarahdoe@test.com"
 }
 
 ### delete user
-DELETE http://localhost:5000/api/users/1
+DELETE http://localhost:5000/api/users/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IiQyYSQxMCRON1pVdy9LalZlNldvSmw3cy9OUkllWTV3RFJFM1NraVBDV0RHQ2ZjSjBDdXlLa1Jab3VoRyIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTczNzcxMjM1NCwiZXhwIjoxNzM3NzE0MTU0fQ.vAyq9y-6jTnPHeWxMDk-pPR06jO0_57687pD6vewg6U
 
 ### edit user
-PUT http://localhost:5000/api/users/4
+PUT http://localhost:5000/api/users/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IiQyYSQxMCRON1pVdy9LalZlNldvSmw3cy9OUkllWTV3RFJFM1NraVBDV0RHQ2ZjSjBDdXlLa1Jab3VoRyIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTczNzcxMjM1NCwiZXhwIjoxNzM3NzE0MTU0fQ.vAyq9y-6jTnPHeWxMDk-pPR06jO0_57687pD6vewg6U
 Content-Type: application/json
 
 {
-    "username": "testuser",
-    "email": "test@user.com"
+    "fullName": "Jan Jankovic"
 }
 
 ############################################# HISTORY
 GET http://localhost:5000/api/history
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
 ### insert data into history
 POST http://localhost:5000/api/history
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 Content-Type: application/json
 
 {
-    "userId": "4",
-    "deviceId": "1",
-    "rentDate": "2025-01-11",
-    "returnDate": "2025-01-15"
+    "userId": "7",
+    "deviceId": "3",
+    "rentDate": "2025-01-01",
+    "returnDate": "2025-01-05"
 }
 
 ### delete data from history
-DELETE http://localhost:5000/api/history/1
+DELETE http://localhost:5000/api/history/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
+
+############################################# AUTHENTICATION
+### user sign up
+POST http://localhost:5000/auth/sign-up
+Content-Type: application/json
+
+{
+    "fullName": "John Doe",
+    "role": "user",
+    "username": "johndoe",
+    "password1": "Admin1234!",
+    "password2": "Admin1234!",
+    "email": "johndoe@test.com"
+}
+
+### user log in
+POST http://localhost:5000/auth/log-in
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "Admin1234!"
+}
+
+### refreshing access token
+POST http://localhost:5000/auth/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDh9.PPYp202HI3R49UswkU-7G7ptGpdlINYDd6g7XWDCuK0"
+}
+
+### user log out
+DELETE http://localhost:5000/auth/log-out
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IiQyYSQxMCRON1pVdy9LalZlNldvSmw3cy9OUkllWTV3RFJFM1NraVBDV0RHQ2ZjSjBDdXlLa1Jab3VoRyIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTczNzcxMjM1NX0.hq6YWRsrQZHY_5Un9gGUwgaJM3pEV1250kf8mTBJFlc"
+}
+
+############################################# CLIENTS
+### retrieving clients
+GET http://localhost:5000/api/clients
+
+### creating client
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+    "fullName": "Luke Doe",
+    "email": "lukedoe@gmail.com"
+}
+
+### updating client
+PUT http://localhost:5000/api/clients/1
+Content-Type: application/json
+
+{
+    "email": "davidoe@gmail.com"
+}
+
+### removing client
+DELETE http://localhost:5000/api/clients/2
