@@ -23,24 +23,30 @@ model Device {
   history         History[]
 }
 
-model User {
+model Client {
   id       Int       @id @default(autoincrement())
   fullName String
-  role     Role      @default(user)
-  username String    @unique
-  password String
   email    String    @unique
   history  History[]
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  fullName String
+  role     Role   @default(user)
+  username String @unique
+  password String
+  email    String @unique
 }
 
 model History {
   id         Int       @id @default(autoincrement())
   deviceId   Int
-  userId     Int
+  clientId   Int
   rentDate   DateTime
   returnDate DateTime?
   device     Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
-  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client     Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 model refreshToken {
