@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormInput from "./FormInput";
 import { FaCheck } from "react-icons/fa";
 import { useClientContext } from "../../context/ClientsContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function NewClientForm() {
+    const navigate = useNavigate();
+    const { user } = useAuth();
     const { loading, error, createClient } = useClientContext();
     const [errorLocal, setErrorLocal] = useState(error);
     const [message, setMessage] = useState(null);
@@ -11,6 +15,10 @@ export default function NewClientForm() {
         fullName: "",
         email: "",
     });
+
+    useEffect(() => {
+        if (!user) navigate("/log-in");
+    }, []);
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -50,6 +58,29 @@ export default function NewClientForm() {
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 </div>
+            }
+            {
+                user &&
+                <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
+                    <FormInput
+                        labelText={"Full Name"}
+                        inputName={"fullName"}
+                        inputType={"text"}
+                        inputValue={client.fullName}
+                        onChange={ handleChange }
+                    />
+                    <FormInput
+                        labelText={"E-mail"}
+                        inputName={"email"}
+                        inputType={"email"}
+                        inputValue={client.email}
+                        onChange={ handleChange }
+                    />
+                    <button type="submit" className="btn btn-primary d-flex align-items-center justify-content-center">
+                        <FaCheck className="me-1"/>
+                        Create
+                    </button>
+                </form>
             }
             <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
                 <FormInput
