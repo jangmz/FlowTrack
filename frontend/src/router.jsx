@@ -7,6 +7,8 @@ import Desktops from "./components/inventory/Desktops";
 import Projectors from "./components/inventory/Projectors";
 import NewDeviceForm from "./components/inventory/NewDeviceForm";
 import EditDeviceForm from "./components/inventory/EditDeviceForm";
+import Clients from "./components/general/Clients";
+import NewClientForm from "./components/general/NewClientForm";
 
 const routes = [
     { index: true, element: <Home /> }, // renders at "/"
@@ -18,6 +20,8 @@ const routes = [
     { path: "devices/projectors", element: <Projectors /> },
     { path: "devices/new", element: <NewDeviceForm /> },
     { path: "devices/edit/:deviceId", element: <EditDeviceForm /> },
+    { path: "clients", element: <Clients /> },
+    { path: "clients/new", element: <NewClientForm /> },
 ]
 
 export default routes;
