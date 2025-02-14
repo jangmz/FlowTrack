@@ -82,26 +82,6 @@ export default function NewClientForm() {
                     </button>
                 </form>
             }
-            <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
-                <FormInput
-                    labelText={"Full Name"}
-                    inputName={"fullName"}
-                    inputType={"text"}
-                    inputValue={client.fullName}
-                    onChange={ handleChange }
-                />
-                <FormInput
-                    labelText={"E-mail"}
-                    inputName={"email"}
-                    inputType={"email"}
-                    inputValue={client.email}
-                    onChange={ handleChange }
-                />
-                <button type="submit" className="btn btn-primary d-flex align-items-center justify-content-center">
-                    <FaCheck className="me-1"/>
-                    Create
-                </button>
-            </form>
         </div>
     )
 }
