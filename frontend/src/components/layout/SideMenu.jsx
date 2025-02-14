@@ -1,4 +1,5 @@
-import { FaHome, FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport, FaUserPlus, FaUser } from "react-icons/fa";
+import { FaHome, FaLaptop, FaTabletAlt, FaDesktop, FaVideo, FaPlus, FaFileImport, FaFileExport, FaUserPlus } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { PiDesktopTower } from "react-icons/pi";
 import { FiPrinter } from "react-icons/fi";
 import { RiFileList3Line } from "react-icons/ri";
@@ -35,6 +36,12 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                     Home
                 </Link>
               </li>
+              <li>
+                <Link to="/clients" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                  <FaPeopleGroup className="me-2" />
+                  Clients
+                </Link>
+              </li>
               <li className="">
                 <Link to="/devices/laptops" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                     <FaLaptop className="me-2" />
@@ -60,19 +67,19 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                 </Link>
               </li>
               <li className="">
-                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
                   <FaDesktop className="me-2" />
                   Monitors (disabled)
                 </Link>
               </li>
               <li className="">
-                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
                   <FiPrinter className="me-2" />
                   Printers (disabled)
                 </Link>
               </li>
               <li className="">
-                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
                   <RiFileList3Line className="me-2" />
                   History (disabled)
                 </Link>
