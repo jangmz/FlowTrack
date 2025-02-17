@@ -78,7 +78,7 @@ export default function DeviceTable({ devices }) {
                                 checked={selectedDevices.length === devices.length}
                             />
                         </th>
-                        <th scope="col" className="text-start">Inventory number</th>
+                        <th scope="col" className="text-start">Inv. Num.</th>
                         <th scope="col" className="text-start">Model</th>
                         <th scope="col" className="text-start">Status</th>
                         <th scope="col" className="text-start">User</th>
@@ -118,7 +118,7 @@ export default function DeviceTable({ devices }) {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </td>
-                                <td className="text-start">{device.user ? device.user.fullName : "/"}</td>
+                                <td className="text-start">{device.client ? device.client.fullName : "/"}</td>
                                 <td>
                                     <div className="d-flex gap-2 align-items-center justify-content-end">
                                         <button onClick={(e) => handleEditDevice(device.id)} className="btn btn-outline-primary d-flex align-items-center justify-cotnent-center">
