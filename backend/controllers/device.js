@@ -44,7 +44,14 @@ async function updateDevice(req, res, next) {
     const updatedDevice = req.body;
 
     updatedDevice.id = parseInt(req.params.deviceId);
-    updatedDevice.inventoryNumber = parseInt(updatedDevice.inventoryNumber);
+    
+    if (updatedDevice.inventoryNumber) {
+        updatedDevice.inventoryNumber = parseInt(updatedDevice.inventoryNumber);
+    }
+
+    updatedDevice.clientId 
+        ? updatedDevice.clientId = parseInt(updatedDevice.clientId)
+        : null;
 
     console.log("Updating device data: ", updatedDevice);
 
