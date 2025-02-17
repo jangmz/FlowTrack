@@ -20,14 +20,18 @@ model Device {
   serialNumber    String?
   inventoryNumber Int       @unique
   status          String
+  clientId        Int?
   history         History[]
+  client          Client?   @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 model Client {
   id       Int       @id @default(autoincrement())
   fullName String
   email    String    @unique
+  deviceId Int?
   history  History[]
+  Device   Device[]
 }
 
 model User {
