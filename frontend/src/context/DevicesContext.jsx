@@ -176,7 +176,6 @@ export function DeviceProvider({ children }) {
     // update device data
     async function updateDevice(deviceData) {
         // TODO: unique constraint violation does not display as error on EditDeviceForm page
-        // TODO: devices list is not refreshed once data is successfully updated in DB
         await checkToken();
         console.log("Updating device data...");
 
