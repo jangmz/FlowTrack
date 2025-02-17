@@ -42,6 +42,7 @@ async function updateDevice(device) {
                 serialNumber: device.serialNumber,
                 inventoryNumber: device.inventoryNumber,
                 status: device.status,
+                clientId: device.clientId
             }
         })
     );
@@ -55,7 +56,10 @@ async function getAllDevices() {
                 {
                     inventoryNumber: "asc"
                 }
-            ]
+            ],
+            include: {
+                client: true
+            }
         })
     )
 }
