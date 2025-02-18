@@ -46,11 +46,11 @@ model User {
 model History {
   id         Int       @id @default(autoincrement())
   deviceId   Int
-  clientId   Int
+  clientId   Int?
   rentDate   DateTime
   returnDate DateTime?
   device     Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
-  client     Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  client     Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 model refreshToken {
