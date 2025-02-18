@@ -5,6 +5,13 @@ import DropdownSelection from "../general/DropdownSelection";
 import { useDeviceContext } from "../../context/DevicesContext";
 import { useAuth } from "../../context/AuthContext";
 
+const deviceTypes = [
+    "Laptop",
+    "Desktop",
+    "Tablet",
+    "Projector"
+];
+
 export default function NewDeviceForm() {
     const { user } = useAuth();
     const navigate = useNavigate();
@@ -88,6 +95,7 @@ export default function NewDeviceForm() {
                             label={"Device type"}
                             name={"deviceType"}
                             selectValue={newDevice.deviceType}
+                            optionValues={deviceTypes}
                             onChange={ handleChange }
                         />
                         <button type="submit" className="btn btn-primary">
