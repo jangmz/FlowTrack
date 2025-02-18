@@ -43,6 +43,13 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                 </Link>
               </li>
               <li className="">
+                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                  <RiFileList3Line className="me-2" />
+                  History
+                </Link>
+              </li>
+              <hr />
+              <li className="">
                 <Link to="/devices/laptops" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                     <FaLaptop className="me-2" />
                     Laptops
@@ -66,7 +73,7 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                   Projectors
                 </Link>
               </li>
-              <li className="">
+              {/*<li className="">
                 <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
                   <FaDesktop className="me-2" />
                   Monitors (disabled)
@@ -77,13 +84,7 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                   <FiPrinter className="me-2" />
                   Printers (disabled)
                 </Link>
-              </li>
-              <li className="">
-                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
-                  <RiFileList3Line className="me-2" />
-                  History (disabled)
-                </Link>
-              </li>
+              </li>*/}
             </ul>
 
             {/* Bottom Buttons - currently disabled */}
