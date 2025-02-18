@@ -11,6 +11,7 @@ import ErrorPage from './components/general/ErrorPage';
 import AuthProvider from './context/AuthContext';
 import { DeviceProvider } from './context/DevicesContext';
 import { ClientsProvider } from './context/ClientsContext';
+import { HistoryProvider } from './context/HistoryContext';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,9 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <DeviceProvider>
         <ClientsProvider>
-          <RouterProvider router={router} />
+          <HistoryProvider>
+            <RouterProvider router={router} />
+          </HistoryProvider>
         </ClientsProvider>
       </DeviceProvider>
     </AuthProvider>

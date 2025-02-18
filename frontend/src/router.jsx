@@ -9,6 +9,7 @@ import NewDeviceForm from "./components/inventory/NewDeviceForm";
 import EditDeviceForm from "./components/inventory/EditDeviceForm";
 import Clients from "./components/general/Clients";
 import NewClientForm from "./components/general/NewClientForm";
+import History from "./pages/History";
 
 const routes = [
     { index: true, element: <Home /> }, // renders at "/"
@@ -22,6 +23,7 @@ const routes = [
     { path: "devices/edit/:deviceId", element: <EditDeviceForm /> },
     { path: "clients", element: <Clients /> },
     { path: "clients/new", element: <NewClientForm /> },
+    { path: "history", element: <History /> },
 ]
 
 export default routes;
