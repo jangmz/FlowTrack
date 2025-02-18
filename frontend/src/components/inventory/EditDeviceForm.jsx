@@ -5,6 +5,15 @@ import { useAuth } from "../../context/AuthContext";
 import { useClientContext } from "../../context/ClientsContext";
 import FormInput from "../general/FormInput";
 import DropdownSelection from "../general/DropdownSelection";
+import { FaArrowCircleLeft, FaSave } from "react-icons/fa";
+import { FaRotateLeft } from "react-icons/fa6";
+
+const deviceTypes = [
+    "Laptop",
+    "Desktop",
+    "Tablet",
+    "Projector"
+];
 
 export default function EditDeviceForm() {
     const params = useParams();
@@ -12,17 +21,9 @@ export default function EditDeviceForm() {
     const { clients } = useClientContext();
     const { devices, updateDevice } = useDeviceContext();
     const { user } = useAuth();
-    const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
     const originalDevice = devices.find(dev => dev.id === parseInt(params.deviceId));
     const [device, setDevice] = useState(originalDevice);
-
-    const deviceTypes = [
-        "Laptop",
-        "Desktop",
-        "Tablet",
-        "Projector"
-    ];
 
     useEffect(() => {
         if (!user) navigate("/log-in");
@@ -38,16 +39,30 @@ export default function EditDeviceForm() {
         setDevice(originalDevice);
     }
 
+    function goBack() {
+        const type = device.deviceType.toLowerCase();
+        navigate(`/devices/${type}s`)
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
-        device.client = clients.find(client => client.fullName === device.client);
-        device.clientId = device.client.id;
+        if (!device.client) { // when unassigning the client becomes undefined
+            device.client = null;
+            device.clientId = null;
+            device.status === "Available";
+        } else if (device.client) {
+            device.client = clients.find(client => client.fullName === device.client) || null; // device.client -> full name, changed to client object, if not found "null" is assigned
+            device.clientId = device.client ? device.client.id : null;
+            device.status = device.clientId ? "Unavailable" : "Available"; // device status changed
+        }
+        
         console.log("Submitted device data:", device);
 
         try {
+            const type = device.deviceType.toLowerCase();
             updateDevice(device);
-            setMessage("Device successfully updated.");
+            navigate(`/devices/${type}s`);
         } catch (error) {
             console.error(error.message);
             setError(error.message);
@@ -59,9 +74,6 @@ export default function EditDeviceForm() {
             <h1>Edit {device.deviceType} {device.inventoryNumber}</h1>
             {
                 error && <p className="alert alert-danger">{error}</p>
-            }
-            {
-                message && <p className="alert alert-success">{message}</p>
             }
             <form onSubmit={ handleSubmit } className="d-flex flex-column w-50">
                 <FormInput 
@@ -95,8 +107,8 @@ export default function EditDeviceForm() {
                 {/* TODO: add status dropdown */}
                 <div className="mb-3">
                     <label htmlFor="client">Client</label>
-                    {/* TODO: set "null" value for unsetting a client or for device with no client */}
                     <select name="client" id="client" value={device.client?.fullName} onChange={ handleChange } className="form-select">
+                        <option value={null} key={"null"}>No client</option>
                         {
                             clients.map((client) => (
                                 <option value={client.fullName} key={client.id}>{client.fullName}</option>
@@ -105,11 +117,17 @@ export default function EditDeviceForm() {
                     </select>
                 </div>
                 <div className="d-flex justify-content-between">
-                    <button type="submit" className="btn btn-primary">
-                        Save
+                    <button onClick={ goBack } type="button" className="btn btn-secondary d-flex align-items-center gap-2">
+                        <FaArrowCircleLeft />
+                        <span>Back</span>
                     </button>
-                    <button onClick={ revertData } type="button" className="btn btn-danger">
-                        Cancel
+                    <button type="submit" className="btn btn-primary d-flex align-items-center justify-content-center gap-2" style={{ "width": "200px"}}>
+                        <FaSave />
+                        <span>Save</span>
+                    </button>
+                    <button onClick={ revertData } type="button" className="btn btn-danger d-flex align-items-center gap-2">
+                        <FaRotateLeft />
+                        <span>Reset</span>
                     </button>
                 </div>
             </form>
