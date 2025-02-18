@@ -39,8 +39,13 @@ async function getAllHistoryData() {
                         model: true,
                         status: true
                     }
+                }                
+            },
+            orderBy: [
+                {
+                    rentDate: "desc"
                 }
-            }
+            ]
         })
     );
 }
