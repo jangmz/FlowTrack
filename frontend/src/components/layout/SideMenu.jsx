@@ -43,7 +43,7 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                 </Link>
               </li>
               <li className="">
-                <Link to="#" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
+                <Link to="/history" className="p-2 text-white text-decoration-none d-flex align-items-center sidebar-link">
                   <RiFileList3Line className="me-2" />
                   History
                 </Link>
