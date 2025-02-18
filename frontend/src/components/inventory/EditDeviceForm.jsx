@@ -120,7 +120,6 @@ export default function EditDeviceForm() {
                     selectValue={device.status}
                     onChange={ handleChange }
                 />
-                {/* TODO: add status dropdown */}
                 <div className="mb-3">
                     <label htmlFor="client">Client</label>
                     <select name="client" id="client" value={device.client?.fullName} onChange={ handleChange } className="form-select">
