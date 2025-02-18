@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDeviceContext } from "../../context/DevicesContext";
 import { useAuth } from "../../context/AuthContext";
 import { useClientContext } from "../../context/ClientsContext";
+import { useHistoryContext } from "../../context/HistoryContext";
 import FormInput from "../general/FormInput";
 import DropdownSelection from "../general/DropdownSelection";
 import { FaArrowCircleLeft, FaSave } from "react-icons/fa";
@@ -27,6 +28,7 @@ const statuses = [
 export default function EditDeviceForm() {
     const params = useParams();
     const navigate = useNavigate();
+    const { insertHistoryLog } = useHistoryContext();
     const { clients } = useClientContext();
     const { devices, updateDevice } = useDeviceContext();
     const { user } = useAuth();
@@ -56,21 +58,49 @@ export default function EditDeviceForm() {
     async function handleSubmit(e) {
         e.preventDefault();
 
+        const timeStamp = new Date();
+        let historyLog = {};
+
         if (!device.client) { // when unassigning the client becomes undefined
             device.client = null;
             device.clientId = null;
             device.status === "Available";
+
+            // create history log
+            historyLog = {
+                device: {
+                    id: device.id
+                },
+                rentDate: timeStamp
+            };
         } else if (device.client) {
             device.client = clients.find(client => client.fullName === device.client) || null; // device.client -> full name, changed to client object, if not found "null" is assigned
             device.clientId = device.client ? device.client.id : null;
             device.status = device.clientId ? "Unavailable" : "Available"; // device status changed
+            
+            // create history log
+            historyLog = {
+                device: {
+                    id: device.id
+                },
+                client: device.client ? {
+                    id: device.client.id
+                } : null,
+                rentDate: timeStamp
+            };
         }
         
         console.log("Submitted device data:", device);
 
         try {
             const type = device.deviceType.toLowerCase();
+
+            // update device in the DB and context
             updateDevice(device);
+
+            // log history
+            insertHistoryLog(historyLog);
+
             navigate(`/devices/${type}s`);
         } catch (error) {
             console.error(error.message);
