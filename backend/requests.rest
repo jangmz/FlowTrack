@@ -83,14 +83,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hb
 Content-Type: application/json
 
 {
-    "userId": "7",
-    "deviceId": "3",
-    "rentDate": "2025-01-01",
-    "returnDate": "2025-01-05"
+    "device" : {
+        "id": 1
+    },
+    "client": {
+        "id": 13
+    },
+    "rentDate": "2025-01-01"
 }
 
 ### delete data from history
-DELETE http://localhost:5000/api/history/5
+DELETE http://localhost:5000/api/history/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
 ############################################# AUTHENTICATION
