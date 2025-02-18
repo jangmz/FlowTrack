@@ -8,10 +8,14 @@ async function insertHistoryData(historyData) {
     return await safeQuery(() =>
         prisma.history.create({
             data: {
-                deviceId: historyData.deviceId,
-                userId: historyData.userId,
                 rentDate: historyData.rentDate,
-                returnDate: historyData.returnDate
+                device: {
+                    connect: { id: historyData.device.id }
+                },
+                client : historyData.client 
+                    ? { connect: { id: historyData.client.id } }
+                    : undefined
+                //returnDate: historyData.returnDate
             }
         })
     );
@@ -22,11 +26,10 @@ async function getAllHistoryData() {
     return await safeQuery(() =>
         prisma.history.findMany({
             include: {
-                user: {
+                client: {
                     select: {
                         fullName: true,
-                        email: true,
-                        username: true,
+                        email: true
                     }
                 },
                 device: {
@@ -34,6 +37,7 @@ async function getAllHistoryData() {
                         inventoryNumber: true,
                         deviceType: true,
                         model: true,
+                        status: true
                     }
                 }
             }

@@ -15,12 +15,13 @@ async function getHistory(req, res, next) {
 async function insertHistory(req, res, next) {
     const newHistoryData = req.body;
 
-    newHistoryData.deviceId = parseInt(newHistoryData.deviceId);
-    newHistoryData.userId = parseInt(newHistoryData.userId);
-
-    // parse dates
+    // parse data as needed
+    newHistoryData.deviceId = parseInt(newHistoryData.device.id);
+    newHistoryData.clientId = newHistoryData.client ? 
+        parseInt(newHistoryData.client.id)
+        : null;
     newHistoryData.rentDate = parseISO(newHistoryData.rentDate);
-    newHistoryData.returnDate = parseISO(newHistoryData.returnDate);
+    //newHistoryData.returnDate = parseISO(newHistoryData.returnDate);
 
     console.log("Saving new history data: ", newHistoryData);
 
