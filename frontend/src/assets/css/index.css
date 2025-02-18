@@ -1,0 +1,38 @@
+.side-menu-open {
+  width: 250px;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.side-menu-closed {
+  width: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar-link {
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+.sidebar-link:hover {
+  background-color: #005f84;
+  color: white;
+  border-radius: 5px;
+  transition: "color 0.3s ease-in-out";
+}
+
+@media (max-width: 800px) {
+  .side-menu-open {
+    position: fixed;
+    z-index: 1040;
+    height: 100vh;
+  }
+
+  .side-menu-closed {
+    position: fixed;
+    z-index: 1040;
+    height: 100vh;
+  }
+}
