@@ -1,4 +1,5 @@
 export default function DeviceOverviewCard({ title, stock, icon }) {
+    
     return (
         <div className="card text-bg-light m-2 col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-2" style={{ "minWidth": "180px"}}>
             <div className="card-header d-flex justify-content-between">
@@ -7,7 +8,9 @@ export default function DeviceOverviewCard({ title, stock, icon }) {
             </div>
             <div className="card-body">
                 {
-                    Object.entries(stock).map(([status, count]) => (
+                    Object.entries(stock)
+                    .filter(([status]) => status !== "total") // "total" is excluded from the list
+                    .map(([status, count]) => (
                         <p key={status} className="card-text mb-0">
                             {status}: {count}
                         </p>
