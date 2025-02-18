@@ -1,5 +1,4 @@
 export function formatTimeStamp(date) {
-    console.log(date);
     if (!date) return "";
 
     const formatedDate = new Date(date);
