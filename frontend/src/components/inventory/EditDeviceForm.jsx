@@ -15,6 +15,15 @@ const deviceTypes = [
     "Projector"
 ];
 
+const statuses = [
+    "Available",
+    "Unavailable",
+    "Rented",
+    "Reserved",
+    "Damaged",
+    "Unknown"
+];
+
 export default function EditDeviceForm() {
     const params = useParams();
     const navigate = useNavigate();
@@ -102,6 +111,13 @@ export default function EditDeviceForm() {
                     name={"deviceType"}
                     optionValues={deviceTypes}
                     selectValue={device.deviceType}
+                    onChange={ handleChange }
+                />
+                <DropdownSelection 
+                    label={"Status"}
+                    name={"status"}
+                    optionValues={statuses}
+                    selectValue={device.status}
                     onChange={ handleChange }
                 />
                 {/* TODO: add status dropdown */}
