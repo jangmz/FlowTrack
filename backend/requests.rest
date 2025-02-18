@@ -30,6 +30,15 @@ Content-Type: application/json
     "status": "Unavailable"
 }
 
+### update device data - assigning a client
+PUT http://localhost:5000/api/devices/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbE5hbWUiOiJKYW4gSmFua292acSNIiwicm9sZSI6ImFkbWluIiwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJhJDEwJFBuUE5sOVoyeElkNGJLZjJURnh4NE9KSW1HRHB6d1c1Yy42WVREY0hmdDRtUEVGc0R6WWxxIiwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTczOTc5NDc2NSwiZXhwIjoxNzM5Nzk2NTY1fQ.Tbe5khlXlmo4YhPV_71T-t1F6nrDixydu8FYpFTDiN8
+Content-Type: application/json
+
+{
+    "clientId": 6
+}
+
 ### delete device
 DELETE http://localhost:5000/api/devices/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
