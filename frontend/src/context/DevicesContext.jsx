@@ -156,6 +156,7 @@ export function DeviceProvider({ children }) {
         const allStatuses = ["Available", "Unavailable", "Rented", "Reserved", "Damaged", "Unknown"];
         
         // initialize all statuses to 0
+        let totalDevices = 0;
         const statusCounts = allStatuses.reduce((acc, status) => {
             acc[status] = 0;
             return acc;
@@ -167,10 +168,11 @@ export function DeviceProvider({ children }) {
             .forEach(device => {
                 if (statusCounts.hasOwnProperty(device.status)) {
                     statusCounts[device.status]++;
+                    totalDevices++;
                 }
             });
 
-        return statusCounts;
+        return { ...statusCounts, total: totalDevices };
     }
 
     // update device data
