@@ -6,7 +6,6 @@ import { RiFileList3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 export default function SideMenu({ isOpen, toggleMenu }) {
-  // TODO: check for initial screen width and set isOpen according to that
 
   return (
     <>
@@ -73,18 +72,6 @@ export default function SideMenu({ isOpen, toggleMenu }) {
                   Projectors
                 </Link>
               </li>
-              {/*<li className="">
-                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
-                  <FaDesktop className="me-2" />
-                  Monitors (disabled)
-                </Link>
-              </li>
-              <li className="">
-                <Link to="#" className="p-2 text-dark text-decoration-none d-flex align-items-center sidebar-link">
-                  <FiPrinter className="me-2" />
-                  Printers (disabled)
-                </Link>
-              </li>*/}
             </ul>
 
             {/* Bottom Buttons - currently disabled */}
