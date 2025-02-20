@@ -174,3 +174,18 @@ Content-Type: application/json
 
 ### removing client
 DELETE http://localhost:5000/api/clients/2
+
+### importing clients from a CSV file
+POST http://localhost:5000/api/clients/import
+Content-Type: multipart/form-data; boundary=boundary123
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="clients.csv"
+Content-Type: text/csv
+
+< ../Temp/clients.csv
+--boundary123--
+
+
+### Export clients from DB to CSV file
+GET http://localhost:5000/api/clients/export
