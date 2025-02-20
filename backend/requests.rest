@@ -43,6 +43,22 @@ Content-Type: application/json
 DELETE http://localhost:5000/api/devices/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
 
+### Import devices with a CSV file
+POST http://localhost:5000/api/devices/import
+Content-Type: multipart/form-data; boundary=boundary123
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="data.csv"
+Content-Type: text/csv
+
+< ../Temp/data.csv
+--boundary123--
+
+
+### Export devices from DB to CSV file
+GET http://localhost:5000/api/devices/export
+
+
 ############################################# USERS
 GET http://localhost:5000/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbE5hbWUiOiJKYW4gSmFua292aWMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkTjdaVXcvS2pWZTZXb0psN3MvTlJJZVk1d0RSRTNTa2lQQ1dER0NmY0owQ3V5S2tSWm91aEciLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3Mzc3MTk0NDgsImV4cCI6MTczNzcyMTI0OH0.PDxrMn9PegdgCyzzq5Ax0hqZWTDO1HiBDAj82Okb8p0
