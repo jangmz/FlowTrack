@@ -1,4 +1,9 @@
 import dbClientModel from "../models/clientModel.js";
+import csv from "csv-parser";
+import fs from "fs";
+import { format } from "fast-csv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // GET /api/clients -> returns all clients
 async function getClients(req, res, next) {
@@ -56,9 +61,93 @@ async function deleteClient(req, res, next) {
     }
 }
 
+// POST /api/clients/import -> imports clients data from CSV file
+async function importClients(req, res, next) {
+    const results = [];
+    const filePath = req.file.path;
+    let rowsInserted = 0;
+
+    // open stream to read file and collect rows in results array
+    console.log("Reading file...");
+    try {
+        await new Promise((resolve, reject) => {
+            fs.createReadStream(filePath)
+                .pipe(csv())
+                .on("data", row => {
+                    //console.log(row); // data is ok
+                    results.push(row);
+                })
+                .on("end", resolve)
+                .on("error", reject);
+        });
+    } catch (error) {
+        next(error);
+    }
+
+    console.log("Inserting data into DB...");
+
+    try {
+        // insert rows into DB
+        await Promise.all(results.map(async row => {
+            //console.log("Row to be inserted:")
+            //console.log(row);
+            await dbClientModel.createNewClient(row);
+            rowsInserted++;
+        }));
+
+        // delete file after processing
+        fs.unlinkSync(filePath);
+
+        console.log(`Finished. ${rowsInserted} rows inserted.`);
+        res.json({ message: "Data has been imported successfully." });
+    } catch (error) {
+        next(error);
+    }
+}
+
+// GET /api/clients/export -> exports all clients data to CSV file
+async function exportClients(req, res, next) {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    try {
+        // fetch devices from DB
+        const allClients = await dbClientModel.getAllClients();
+
+        if (!allClients.length) {
+            throw new Error ("No clients found in the database.");
+        }
+
+        // create folder & define file path
+        const exportsDir = path.join(__dirname, "../exports");
+        if (!fs.existsSync(exportsDir)) {
+            fs.mkdirSync(exportsDir, { recursive: true });
+        }
+        const filePath = path.join(__dirname, "../exports/clients.csv");
+        const ws = fs.createWriteStream(filePath);
+
+        // write CSV data
+        const csvStream = format({ headers: true });
+        csvStream.pipe(ws);
+        allClients.forEach((client) => csvStream.write(client));
+        csvStream.end();
+
+        ws.on("finish", () => {
+            res.download(filePath, "clients.csv", (err) => {
+                if (err) next(err);
+                fs.unlinkSync(filePath); // delete file after download
+            });
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
     getClients,
     postClient,
     putClient,
     deleteClient,
+    importClients,
+    exportClients,
 }
