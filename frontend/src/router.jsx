@@ -10,6 +10,8 @@ import EditDeviceForm from "./components/inventory/EditDeviceForm";
 import Clients from "./components/general/Clients";
 import NewClientForm from "./components/general/NewClientForm";
 import History from "./pages/History";
+import ImportForm from "./components/general/ImportForm";
+import ExportForm from "./components/general/ExportForm";
 
 const routes = [
     { index: true, element: <Home /> }, // renders at "/"
@@ -24,6 +26,8 @@ const routes = [
     { path: "clients", element: <Clients /> },
     { path: "clients/new", element: <NewClientForm /> },
     { path: "history", element: <History /> },
+    { path: "import", element: <ImportForm /> },
+    { path: "export", element: <ExportForm /> }
 ]
 
 export default routes;
