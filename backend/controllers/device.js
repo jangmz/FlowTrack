@@ -1,6 +1,9 @@
 import db from "../models/deviceModel.js";
 import csv from "csv-parser";
 import fs from "fs";
+import { format } from "fast-csv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // GET /api/devices -> returns all devices in DB
 async function getAllDevices(req, res, next) {
@@ -112,7 +115,40 @@ async function importDevices(req, res, next) {
 
 // GET /api/devices/export
 async function exportDevices(req, res, next) {
-    res.json({ message: "This function is not yet implemented." });
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    try {
+        // fetch devices from DB
+        const allDevices = await db.getAllDevices();
+
+        if (!allDevices.length) {
+            throw new Error ("No devices found in the database.");
+        }
+
+        // create folder & define file path
+        const exportsDir = path.join(__dirname, "../exports");
+        if (!fs.existsSync(exportsDir)) {
+            fs.mkdirSync(exportsDir, { recursive: true });
+        }
+        const filePath = path.join(__dirname, "../exports/devices.csv");
+        const ws = fs.createWriteStream(filePath);
+
+        // write CSV data
+        const csvStream = format({ headers: true });
+        csvStream.pipe(ws);
+        allDevices.forEach((device) => csvStream.write(device));
+        csvStream.end();
+
+        ws.on("finish", () => {
+            res.download(filePath, "devices.csv", (err) => {
+                if (err) next(err);
+                fs.unlinkSync(filePath); // delete file after download
+            });
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 export default {
