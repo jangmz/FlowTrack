@@ -74,28 +74,32 @@ export default function SideMenu({ isOpen, toggleMenu }) {
               </li>
             </ul>
 
-            {/* Bottom Buttons - currently disabled */}
+            {/* Bottom Buttons */}
             <div className="d-flex flex-column p-3">
               <Link to="/clients/new" style={{ "textDecoration": "none" }}>
-                <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+                <button className="btn btn-outline-primary w-100 mb-2 d-flex align-items-center justify-content-center">
                   <FaUserPlus className="me-2" />
                   New Client
                 </button>
               </Link>
               <Link to="/devices/new" style={{ "textDecoration": "none" }}>
-                <button className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
+                <button className="btn btn-outline-primary w-100 mb-2 d-flex align-items-center justify-content-center">
                   <FaPlus className="me-2" />
                   New Device
                 </button>
               </Link>
-              <button disabled className="btn btn-outline-light w-100 mb-2 d-flex align-items-center justify-content-center">
-                <FaFileImport className="me-2" />
-                Import
-              </button>
-              <button disabled className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center">
-                <FaFileExport className="me-2" />
-                Export
-              </button>
+              <Link to="/import" style={{ "textDecoration": "none" }}>
+                <button className="btn btn-outline-primary w-100 mb-2 d-flex align-items-center justify-content-center">
+                  <FaFileImport className="me-2" />
+                  Import
+                </button>
+              </Link>
+              <Link to="/export" style={{ "textDecoration": "none" }}>
+                <button className="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center">
+                  <FaFileExport className="me-2" />
+                  Export
+                </button>
+              </Link>
             </div>
           </div>
         )}
