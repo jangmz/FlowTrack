@@ -1,0 +1,7 @@
+inventoryNumber,deviceType,model,serialNumber,status
+1004,Laptop,Lenovo ThinkPad T15 G2,OP1239992,Available
+1005,Laptop,Lenovo ThinkPad T15 G2,OP0129391,Available
+1006,Laptop,Lenovo ThinkPad T15 G2,OP8283822,Unavailable
+1007,Laptop,Lenovo ThinkPad T15 G2,OP9550202,Rented
+1008,Laptop,Lenovo ThinkPad T15 G2,OP2928488,Damaged
+1009,Laptop,Lenovo ThinkPad T15 G2,OP0983111,Unknown
