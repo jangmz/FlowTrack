@@ -119,8 +119,10 @@ export function ClientsProvider({ children }) {
         console.log("Uploading data...");
 
         try {
+            const at = localStorage.getItem("accessToken");
             const response = await fetch(`${apiUrl}/api/clients/import`, {
                 method: "POST",
+                headers: { "Authorization": `Bearer ${at}` },
                 body: formData
             });
 

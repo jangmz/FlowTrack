@@ -215,8 +215,10 @@ export function DeviceProvider({ children }) {
         console.log("Uploading data...");
 
         try {
+            const at = localStorage.getItem("accessToken");
             const response = await fetch(`${apiUrl}/api/devices/import`, {
                 method: "POST",
+                headers: { "Authorization": `Bearer ${at}` },
                 body: formData
             });
 
