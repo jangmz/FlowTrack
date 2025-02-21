@@ -81,6 +81,7 @@ async function importClients(req, res, next) {
                 .on("error", reject);
         });
     } catch (error) {
+        fs.unlinkSync(filePath);
         next(error);
     }
 
@@ -101,6 +102,7 @@ async function importClients(req, res, next) {
         console.log(`Finished. ${rowsInserted} rows inserted.`);
         res.json({ message: "Data has been imported successfully." });
     } catch (error) {
+        fs.unlinkSync(filePath);
         next(error);
     }
 }
