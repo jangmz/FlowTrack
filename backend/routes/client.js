@@ -10,7 +10,7 @@ clientRouter.get("/", adminAuthorization, clientController.getClients);
 clientRouter.post("/", adminAuthorization, clientController.postClient);
 clientRouter.put("/:clientId", adminAuthorization, clientController.putClient);
 clientRouter.delete("/:clientId", adminAuthorization, clientController.deleteClient);
-clientRouter.post("/import", upload.single("file"), clientController.importClients);
-clientRouter.get("/export", clientController.exportClients);
+clientRouter.post("/import", adminAuthorization, upload.single("file"), clientController.importClients);
+clientRouter.get("/export", adminAuthorization, clientController.exportClients);
 
 export default clientRouter;

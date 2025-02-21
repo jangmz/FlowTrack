@@ -10,7 +10,7 @@ deviceRouter.get("/", adminAuthorization, deviceController.getAllDevices);
 deviceRouter.post("/", adminAuthorization, deviceController.insertDevice);
 deviceRouter.delete("/:deviceId", adminAuthorization, deviceController.deleteDevice);
 deviceRouter.put("/:deviceId", adminAuthorization, deviceController.updateDevice);
-deviceRouter.post("/import", upload.single("file"), deviceController.importDevices);
-deviceRouter.get("/export",  deviceController.exportDevices);
+deviceRouter.post("/import", adminAuthorization, upload.single("file"), deviceController.importDevices);
+deviceRouter.get("/export", adminAuthorization,  deviceController.exportDevices);
 
 export default deviceRouter;
