@@ -209,6 +209,35 @@ export function DeviceProvider({ children }) {
         }
     }
 
+    // import devices
+    async function importDevices(formData) {
+        await checkToken();
+        console.log("Uploading data...");
+
+        try {
+            const response = await fetch(`${apiUrl}/api/devices/import`, {
+                method: "POST",
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error?.message || errData.message);
+            }
+
+            await loadDevices(); // refresh context data
+            console.log("Data imported, state updated.");
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw error.message;
+        }
+    }
+
+    // export devices data
+    async function exportDevices() {
+        
+    }
+
     return (
         <DeviceContext.Provider value={{ 
             devices, 
@@ -219,6 +248,8 @@ export function DeviceProvider({ children }) {
             deleteDevice,
             countDeviceStatuses,
             updateDevice,
+            importDevices,
+            exportDevices
         }}>
             { children }
         </DeviceContext.Provider>

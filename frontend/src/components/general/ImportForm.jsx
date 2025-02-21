@@ -4,25 +4,47 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUpload } from "react-icons/fa";
+import { useClientContext } from "../../context/ClientsContext";
+import { useDeviceContext } from "../../context/DevicesContext";
 
 export default function ImportForm() {
     const [dataType, setDataType] = useState("devices");
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { importClients } = useClientContext();
+    const { importDevices } = useDeviceContext();
 
     useEffect(() => {
         if(!user) navigate("/log-in");
     }, [user]);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
-        if (dataType === "clients") {
-            console.log("Submitted clients");
-            // call function in context
-        } else if (dataType === "devices") {
-            console.log("Submitted devices");
-            // call function in context
+        try {
+            const formData = new FormData();
+            const fileInput = e.target.elements.file;
+            const file = fileInput.files[0];
+
+            if (!file) {
+                throw new Error("No file selected.");
+            }
+
+            formData.append("file", file);
+
+            if (dataType === "clients") {
+                // import clients to DB
+                await importClients(formData);
+            } else if (dataType === "devices") {
+                // import devices to DB
+                await importDevices(formData);
+            }
+            setError(prev => prev = null);
+            setSuccess("Data successfully imported.");
+        } catch (error) {
+            setError(error);
         }
     }
 
@@ -35,7 +57,14 @@ export default function ImportForm() {
             <h1 className="text-center">
                 Data Import
             </h1>
-            
+            {
+                error &&
+                <p className="alert alert-danger">{error}</p>
+            }
+            {
+                success &&
+                <p className="alert alert-success">{success}</p>
+            }
             <form onSubmit={ handleSubmit } encType="multipart/form-data" className="d-flex flex-column w-50">
                 <FormInput 
                     labelText={"CSV File"}

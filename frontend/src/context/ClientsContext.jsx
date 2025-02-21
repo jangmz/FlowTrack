@@ -77,7 +77,7 @@ export function ClientsProvider({ children }) {
             console.log("Client added, state updated.");
         } catch (error) {
             console.error("Caught error:", error.message);
-            throw new Error(error.message);
+            return new Error(error.message);
         } finally {
             setLoading(false);
         }
@@ -113,13 +113,44 @@ export function ClientsProvider({ children }) {
         }
     }
 
+    // importing client data
+    async function importClients(formData) {
+        await checkToken();
+        console.log("Uploading data...");
+
+        try {
+            const response = await fetch(`${apiUrl}/api/clients/import`, {
+                method: "POST",
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error?.message || errData.message);
+            }
+
+            await loadClients(); // refresh context data
+            console.log("Data imported, state updated.");
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw error.message;
+        }
+    }
+
+    // exporting client data
+    async function exportClients() {
+
+    }
+
     return (
         <ClientsContext.Provider value={{
             clients,
             loading,
             error,
             createClient,
-            deleteClient
+            deleteClient,
+            importClients,
+            exportClients
         }}>
             { children }
         </ClientsContext.Provider>
