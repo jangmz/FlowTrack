@@ -141,7 +141,41 @@ export function ClientsProvider({ children }) {
 
     // exporting client data
     async function exportClients() {
+        await checkToken();
+        console.log("Exporting data from the database...");
 
+        try {
+            const at = localStorage.getItem("accessToken");
+            const response = await fetch(`${apiUrl}/api/clients/export`, {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${at}` }
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error?.message || errData.message);
+            }
+
+            // converting response to blob
+            const blob = await response.blob();
+
+            // create URL for the file and trigger download
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "clients_export.csv";
+            document.body.appendChild(a);
+            a.click();
+
+            // clean up
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            console.log("Data exported and downloaded.");
+        } catch (error) {
+            console.error("Caught error:", error.message);
+            throw error.message;
+        }
     }
 
     return (
