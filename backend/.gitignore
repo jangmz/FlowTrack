@@ -131,3 +131,7 @@ dist
 
 # REST requests
 *.rest
+
+# Docker
+Dockerfile
+.dockerignore
