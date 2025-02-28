@@ -49,6 +49,10 @@ export default function LogIn() {
                     </div>
                 </div>
             }
+            {
+                localError && 
+                <p className="alert alert-danger mt-3">{localError}</p>
+            }
             <form className="d-flex flex-column w-50" onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-3">
                     <label htmlFor="username" className="form-label">Username</label>
@@ -60,10 +64,13 @@ export default function LogIn() {
                 </div>
                 <button type="submit" className="btn btn-primary" >Log In</button>
             </form>
-            {
-                localError && 
-                <p className="alert alert-danger mt-4">{localError}</p>
-            }
+            <p className="alert alert-info text-center mt-4">
+                To test the application, log in with these administrative credentials: 
+                <ul>
+                    <li>Username: guest</li>
+                    <li>Password: Guest2025!</li>
+                </ul>
+            </p>
         </div>
     )
 }
