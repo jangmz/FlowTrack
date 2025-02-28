@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function LogIn() {
     const navigate = useNavigate();
-    const { logIn, error } = useAuth();
+    const { logIn, error, loading } = useAuth();
     const [localError, setLocalError] = useState();
     const [logInUser, setlogInUser] = useState({
         username: "",
@@ -33,6 +33,22 @@ export default function LogIn() {
     return (
         <div className="container d-flex flex-column align-items-center">
             <h1>Log In</h1>
+            {
+                loading &&
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                    <div className="spinner-border m-3" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <div className="alert alert-info text-center" role="alert">
+                        <p className="m-0">
+                            Please wait about 1 min for backend to start up as it is hosted on a service that puts application to sleep during periods of inactivity.
+                        </p>
+                        <p className="m-0">
+                            After start up, everything will work normally.
+                        </p>
+                    </div>
+                </div>
+            }
             <form className="d-flex flex-column w-50" onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-3">
                     <label htmlFor="username" className="form-label">Username</label>

@@ -8,10 +8,14 @@ function AuthProvider({ children }) {
     const [user, setUser] = useState();
     const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refreshToken") || "");
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
     const [arrErrors, setArrErrors] = useState([]); // for array of validation errors on sign up
 
     async function logIn(logInData) {
         console.log("User logging in...");
+
+        setLoading(true);
+
         try {
             const response = await fetch(`${apiUrl}/auth/log-in`, {
                 method: "POST",
@@ -41,6 +45,8 @@ function AuthProvider({ children }) {
             console.error(error);
             setError(error);
             return false;
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -106,7 +112,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, logIn, signUp, logOut, refreshToken, error, arrErrors }}>
+        <AuthContext.Provider value={{ user, logIn, signUp, logOut, refreshToken, error, loading, arrErrors }}>
             { children }
         </AuthContext.Provider>
     )
