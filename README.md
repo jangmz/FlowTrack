@@ -20,6 +20,18 @@ To run this application locally:
 - Client management
 - CSV import/export functionality
 
+## Screenshots
+### Home page
+![flowtrack_home](https://github.com/user-attachments/assets/f6b4dfc7-b421-4492-943f-c6d706d7b12c)
+### Devices List (laptops)
+![flowtrack_devices](https://github.com/user-attachments/assets/e27ae33a-0347-45ff-a0a8-a2a2f5c0f14a)
+### History Log
+![flowtrack_history](https://github.com/user-attachments/assets/3add3ccb-175c-4752-83c8-fdb71294fad0)
+### Clients List
+![flowtrack_clients](https://github.com/user-attachments/assets/efbc73b8-a2bc-459d-83b4-43e209b350cd)
+### Edit device
+![flowtrack_editdevice](https://github.com/user-attachments/assets/dc50b165-bbef-40c0-a0b6-deff9fd58c34)
+
 ## Backend (REST API)
 This web API is made with Express, PostgreSQL database, and Prisma ORM. The API handles CRUD operations for devices, users, history, and clients. Authentication is implemented using JWT.
 
